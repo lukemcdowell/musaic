@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 
+// get auth token from spotify
 export async function GET() {
   const client_id = process.env.SPOTIFY_CLIENT_ID!;
   const client_secret = process.env.SPOTIFY_CLIENT_SECRET!;
@@ -13,6 +14,7 @@ export async function GET() {
         Buffer.from(client_id + ':' + client_secret).toString('base64'),
     },
     body: 'grant_type=client_credentials',
+    next: { revalidate: 3600 }, // cache token for an hour
   };
 
   try {
@@ -23,7 +25,6 @@ export async function GET() {
     const data = await response.json();
 
     if (response.ok) {
-      console.log(data);
       return NextResponse.json(data);
     } else {
       return NextResponse.json({ error: data }, { status: response.status });
