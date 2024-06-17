@@ -1,13 +1,83 @@
-import { Input } from "@/components/ui/input";
+'use client';
+
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { useState } from 'react';
 
 export default function Home() {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSearch = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setError(null);
+
+    try {
+      const response = await fetch(`/api/search?query=${query}`);
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log(data);
+        setResults(data.albums.items);
+      } else {
+        setError(data.error.message);
+      }
+    } catch (error) {
+      setError('An error occurred while fetching data');
+    }
+  };
+
   return (
     <main className="flex min-h-screen flex-row items-center justify-between">
-        
-      <div className="w-1/3 min-h-screen p-4 border-solid border-0 border-r border-primary">
-        <h1 className="text-4xl font-bold text-center pt-8 pb-10">Top Albums</h1>
-        <Input placeholder="Search for an album" />
+      <div className="w-2/5 min-h-screen p-4 border-solid border-0 border-r border-primary">
+        <h1 className="text-4xl font-bold text-center pt-8 pb-10">
+          Top Albums
+        </h1>
+        <form onSubmit={handleSearch}>
+          <Input
+            placeholder="Search for an album"
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <Button type="submit">Search</Button>
+        </form>
         <div className="grid grid-cols-3 gap-4 h-full py-4">
+          {results.map((album) => (
+            <div key={album.id} className="border h-32 w-32 border-primary">
+              <img src={album.images[0]?.url} alt={album.name} />
+            </div>
+          ))}
+          {/* <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div> */}
+        </div>
+      </div>
+      <div className="flex min-h-screen w-full flex-row items-center justify-center p-16">
+        <div className="grid grid-cols-5 gap-4 h-full">
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
+          <div className="border h-32 w-32 border-primary"></div>
           <div className="border h-32 w-32 border-primary"></div>
           <div className="border h-32 w-32 border-primary"></div>
           <div className="border h-32 w-32 border-primary"></div>
@@ -22,35 +92,6 @@ export default function Home() {
           <div className="border h-32 w-32 border-primary"></div>
         </div>
       </div>
-      <div className="flex min-h-screen w-full flex-row items-center justify-center p-16">
-        <div className="grid grid-cols-5 gap-4 h-full">
-          <div className="border h-32 w-32 border-primary"></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-          <div className="border h-32 w-32 border-primary" ></div>
-        </div>
-      </div> 
     </main>
   );
 }
