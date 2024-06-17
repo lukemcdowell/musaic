@@ -30,13 +30,14 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-row items-center justify-between">
-      <div className="w-2/5 min-h-screen p-4 border-solid border-0 border-r border-primary">
+      <div className="w-1/4 min-h-screen p-4 border-solid border-0 border-r border-primary flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold text-center pt-8 pb-10">
-          Top Albums
+          Top Album Grid
         </h1>
-        <form onSubmit={handleSearch}>
+        <form className="w-full flex" onSubmit={handleSearch}>
           <Input
-            placeholder="Search for an album"
+            className="w-full"
+            placeholder="Search for an album..."
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -49,21 +50,9 @@ export default function Home() {
               <img src={album.images[0]?.url} alt={album.name} />
             </div>
           ))}
-          {/* <div className="border h-32 w-32 border-primary"></div>
-          <div className="border h-32 w-32 border-primary"></div>
-          <div className="border h-32 w-32 border-primary"></div>
-          <div className="border h-32 w-32 border-primary"></div>
-          <div className="border h-32 w-32 border-primary"></div>
-          <div className="border h-32 w-32 border-primary"></div>
-          <div className="border h-32 w-32 border-primary"></div>
-          <div className="border h-32 w-32 border-primary"></div>
-          <div className="border h-32 w-32 border-primary"></div>
-          <div className="border h-32 w-32 border-primary"></div>
-          <div className="border h-32 w-32 border-primary"></div>
-          <div className="border h-32 w-32 border-primary"></div> */}
         </div>
       </div>
-      <div className="flex min-h-screen w-full flex-row items-center justify-center p-16">
+      <div className="w-3/4 min-h-screen flex flex-row items-center justify-center p-16">
         <div className="grid grid-cols-5 gap-4 h-full">
           <div className="border h-32 w-32 border-primary"></div>
           <div className="border h-32 w-32 border-primary"></div>
