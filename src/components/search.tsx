@@ -1,15 +1,18 @@
 'use client';
 
 import { useState } from 'react';
+import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Skeleton } from './ui/skeleton';
 
 function Search() {
+  const [searchTerm, setSearchTerm] = useState<string | null>(null);
   const [results, setResults] = useState<any[] | null>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<Boolean>(false);
 
-  const handleSearch = async (searchTerm: String) => {
+  const handleSearch = async (newSearchTerm: string) => {
+    setSearchTerm(newSearchTerm);
     setResults(null);
     setLoading(true);
 
@@ -33,6 +36,11 @@ function Search() {
     setLoading(false);
   };
 
+  const clearSearch = () => {
+    setSearchTerm(null);
+    setResults(null);
+  };
+
   const renderEmptyDivs = () =>
     Array.from({ length: 9 }).map((_, index) => (
       <div key={index} className="border h-32 w-32 border-primary"></div>
@@ -52,13 +60,26 @@ function Search() {
 
   return (
     <div className="w-full px-5">
-      <Input
-        className="w-full"
-        placeholder="Search for an album..."
-        type="text"
-        autoFocus
-        onChange={(e) => handleSearch(e.target.value)}
-      />
+      {searchTerm !== null ? (
+        <div className="flex flex-row gap-2 align-center">
+          <Input
+            className="w-full"
+            placeholder="Search for an album..."
+            type="text"
+            autoFocus
+            onChange={(e) => handleSearch(e.target.value)}
+          />
+          <Button onClick={clearSearch}>Clear</Button>
+        </div>
+      ) : (
+        <Input
+          className="w-full"
+          placeholder="Search for an album..."
+          type="text"
+          autoFocus
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+      )}
 
       {error ?? <p>{error}</p>}
 
