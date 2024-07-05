@@ -1,4 +1,4 @@
-import Album from '@/components/album';
+import EmptySquare from '@/components/emptySquare';
 import Search from '@/components/search';
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
         <div className="flex-grow min-h-screen flex flex-row items-center justify-center py-8">
           <div className="grid grid-cols-5 gap-2 h-full">
             {Array.from({ length: 25 }).map((_, index) => (
-              <Album key={index} />
+              <EmptySquare key={index} />
             ))}
           </div>
         </div>

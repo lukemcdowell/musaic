@@ -1,57 +1,68 @@
 'use client';
 
-import { useState } from 'react';
+import { AlbumType } from '@/types/types';
+import debounce from 'lodash.debounce';
+import { useCallback, useEffect, useState } from 'react';
+import Album from './album';
+import EmptySquare from './emptySquare';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Skeleton } from './ui/skeleton';
 
 function Search() {
-  const [searchTerm, setSearchTerm] = useState<string | null>(null);
-  const [results, setResults] = useState<any[] | null>([]);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [results, setResults] = useState<AlbumType[] | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<Boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSearch = async (newSearchTerm: string) => {
-    setSearchTerm(newSearchTerm);
-    setResults(null);
-    setLoading(true);
+    if (newSearchTerm.trim() === '') {
+      setLoading(false);
+      return;
+    }
 
-    if (searchTerm === null || searchTerm.trim() === '') {
-      setResults(null);
-    } else {
-      try {
-        const response = await fetch(`/api/search?query=${searchTerm}`);
-        const data = await response.json();
+    try {
+      const response = await fetch(`/api/search?query=${newSearchTerm}`);
+      const data = await response.json();
 
-        if (response.ok) {
-          setResults(data.albums.items);
-        } else {
-          setError(data.error.message);
-        }
-      } catch (error) {
-        setError('An error occurred while fetching data');
+      if (response.ok) {
+        setResults(data.albums.items);
+      } else {
+        setError(data.error.message);
       }
+    } catch (error) {
+      setError('An error occurred while fetching data');
     }
 
     setLoading(false);
   };
 
   const clearSearch = () => {
-    setSearchTerm(null);
+    setSearchTerm('');
     setResults(null);
+    setError(null);
   };
 
+  const debouncedSearch = useCallback(
+    debounce((term: string) => handleSearch(term), 300),
+    []
+  );
+
+  useEffect(() => {
+    setResults(null);
+    setLoading(true);
+    if (searchTerm.trim() !== '') {
+      debouncedSearch(searchTerm);
+    } else {
+      setLoading(false);
+    }
+  }, [searchTerm]);
+
   const renderEmptyDivs = () =>
-    Array.from({ length: 9 }).map((_, index) => (
-      <div key={index} className="border h-32 w-32 border-primary"></div>
-    ));
+    Array.from({ length: 9 }).map((_, index) => <EmptySquare key={index} />);
 
   const renderAlbums = () =>
-    results?.map((album) => (
-      <div key={album.id} className="border h-32 w-32">
-        <img src={album.images[0]?.url} alt={album.name} />
-      </div>
-    ));
+    results?.map((album: AlbumType) => <Album album={album} />);
 
   const renderSkeletons = () =>
     Array.from({ length: 9 }).map((_, index) => (
@@ -60,28 +71,19 @@ function Search() {
 
   return (
     <div className="w-full px-5">
-      {searchTerm !== null ? (
-        <div className="flex flex-row gap-2 align-center">
-          <Input
-            className="w-full"
-            placeholder="Search for an album..."
-            type="text"
-            autoFocus
-            onChange={(e) => handleSearch(e.target.value)}
-          />
-          <Button onClick={clearSearch}>Clear</Button>
-        </div>
-      ) : (
+      <div className="flex flex-row gap-2 align-center">
         <Input
           className="w-full"
           placeholder="Search for an album..."
           type="text"
           autoFocus
-          onChange={(e) => handleSearch(e.target.value)}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
-      )}
+        {searchTerm !== '' && <Button onClick={clearSearch}>Clear</Button>}
+      </div>
 
-      {error ?? <p>{error}</p>}
+      {error && <p>{error}</p>}
 
       <div className="grid grid-cols-3 gap-4 h-full py-4">
         {(results === null || results.length === 0) && !loading
