@@ -4,7 +4,6 @@ import { AlbumType } from '@/types/types';
 import debounce from 'lodash.debounce';
 import { useCallback, useEffect, useState } from 'react';
 import Album from './album';
-import EmptySquare from './emptySquare';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Skeleton } from './ui/skeleton';
@@ -59,7 +58,7 @@ function Search() {
   }, [searchTerm]);
 
   const renderEmptyDivs = () =>
-    Array.from({ length: 9 }).map((_, index) => <EmptySquare key={index} />);
+    Array.from({ length: 9 }).map((_, index) => <Album key={index} />);
 
   const renderAlbums = () =>
     results?.map((album: AlbumType) => <Album album={album} />);
