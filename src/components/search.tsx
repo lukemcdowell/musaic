@@ -1,16 +1,20 @@
 'use client';
 
-import { AlbumType } from '@/types/types';
+import { Album } from '@/types/types';
 import debounce from 'lodash.debounce';
 import { useCallback, useEffect, useState } from 'react';
-import Album from './album';
+import ResultAlbum from './resultAlbum';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Skeleton } from './ui/skeleton';
 
-function Search() {
+interface SearchProps {
+  onImageClick: (album: Album) => void;
+}
+
+function Search({ onImageClick }: SearchProps) {
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [results, setResults] = useState<AlbumType[] | null>(null);
+  const [results, setResults] = useState<Album[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -58,10 +62,12 @@ function Search() {
   }, [searchTerm]);
 
   const renderEmptyDivs = () =>
-    Array.from({ length: 9 }).map((_, index) => <Album key={index} />);
+    Array.from({ length: 9 }).map((_, index) => <ResultAlbum key={index} />);
 
   const renderAlbums = () =>
-    results?.map((album: AlbumType) => <Album album={album} />);
+    results?.map((album: Album) => (
+      <ResultAlbum album={album} onClick={() => onImageClick(album)} />
+    ));
 
   const renderSkeletons = () =>
     Array.from({ length: 9 }).map((_, index) => (
