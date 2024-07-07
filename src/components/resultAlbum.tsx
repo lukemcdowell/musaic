@@ -4,11 +4,10 @@ import { useDrag } from 'react-dnd';
 
 interface ResultAlbumProps {
   album?: Album | null;
-  key?: number;
   onClick?: () => void;
 }
 
-function ResultAlbum({ album, key, onClick }: ResultAlbumProps) {
+function ResultAlbum({ album, onClick }: ResultAlbumProps) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'album',
     item: { album },
@@ -20,7 +19,6 @@ function ResultAlbum({ album, key, onClick }: ResultAlbumProps) {
   return album ? (
     <div
       ref={drag}
-      key={album.id}
       className={`border h-32 w-32  ${isDragging ? 'opacity-50' : ''}`}
       onClick={onClick}
     >
@@ -31,7 +29,7 @@ function ResultAlbum({ album, key, onClick }: ResultAlbumProps) {
       />
     </div>
   ) : (
-    <div key={key} className="border h-32 w-32 border-primary"></div>
+    <div className="border h-32 w-32"></div>
   );
 }
 

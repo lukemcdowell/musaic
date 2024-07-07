@@ -4,35 +4,41 @@ import { useDrop } from 'react-dnd';
 
 interface TopAlbumProps {
   album?: Album | null;
-  key?: number;
   onDrop: (album: Album) => void;
 }
 
-function TopAlbum({ album, key, onDrop }: TopAlbumProps) {
-  const [{ isOver }, drop] = useDrop(() => ({
+function TopAlbum({ album, onDrop }: TopAlbumProps) {
+  const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: 'album',
     drop: (item: { album: Album }) => {
       onDrop(item.album);
     },
     collect: (monitor) => ({
       isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
     }),
   }));
 
+  const isActive = canDrop && isOver;
+
+  let albumStyle = 'border h-32 w-32 bg-transparent';
+  if (isActive) {
+    albumStyle = 'border h-32 w-32 bg-primary';
+  } else if (canDrop) {
+    albumStyle = 'border h-32 w-32 bg-secondary';
+  }
+
   return album ? (
-    <div
-      ref={drop}
-      key={album.id}
-      className={`border h-32 w-32 ${isOver ? 'bg-blue-200' : ''}`}
-    >
+    <div ref={drop} className={`${albumStyle}`}>
       <img
+        className={`${albumStyle} ${canDrop ? 'opacity-70' : ''}`}
         src={album.images[0]?.url}
         alt={album.name}
         title={`${album.name} - ${joinArtists(album.artists)}`}
       />
     </div>
   ) : (
-    <div key={key} className="border h-32 w-32 border-primary"></div>
+    <div ref={drop} className={`${albumStyle}`}></div>
   );
 }
 
