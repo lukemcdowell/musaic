@@ -14,7 +14,7 @@ export default function Home() {
   );
 
   const handleImageClick = (album: Album) => {
-    const firstEmptyIndex = topAlbums.findIndex((square) => square === null);
+    const firstEmptyIndex = topAlbums.findIndex((album) => album === null);
     if (firstEmptyIndex !== -1) {
       const newTopAlbums = [...topAlbums];
       newTopAlbums[firstEmptyIndex] = album;
@@ -22,9 +22,14 @@ export default function Home() {
     }
   };
 
-  const handleDrop = (album: Album, index: number) => {
+  const handleDrop = (fromIndex: number, toIndex: number) => {
     const newTopAlbums = [...topAlbums];
-    newTopAlbums[index] = album;
+
+    [newTopAlbums[toIndex], newTopAlbums[fromIndex]] = [
+      newTopAlbums[fromIndex],
+      newTopAlbums[toIndex],
+    ];
+
     setTopAlbums(newTopAlbums);
   };
 
@@ -48,7 +53,8 @@ export default function Home() {
                 <TopAlbum
                   key={index}
                   album={album}
-                  onDrop={(droppedAlbum) => handleDrop(droppedAlbum, index)}
+                  index={index}
+                  onDrop={handleDrop}
                 />
               ))}
             </div>

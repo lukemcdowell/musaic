@@ -1,6 +1,5 @@
 import { joinArtists } from '@/lib/utils';
 import { Album } from '@/types/types';
-import { useDrag } from 'react-dnd';
 
 interface ResultAlbumProps {
   album?: Album | null;
@@ -8,18 +7,9 @@ interface ResultAlbumProps {
 }
 
 function ResultAlbum({ album, onClick }: ResultAlbumProps) {
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: 'album',
-    item: { album },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  }));
-
   return album ? (
     <div
-      ref={drag}
-      className={`border h-32 w-32  ${isDragging ? 'opacity-50' : ''}`}
+      className={`border h-32 w-32 rounded cursor-pointer`}
       onClick={onClick}
     >
       <img
@@ -29,7 +19,7 @@ function ResultAlbum({ album, onClick }: ResultAlbumProps) {
       />
     </div>
   ) : (
-    <div className="border h-32 w-32"></div>
+    <div className="border h-32 w-32 rounded"></div>
   );
 }
 
