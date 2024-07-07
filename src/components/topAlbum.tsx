@@ -1,17 +1,18 @@
 import { joinArtists } from '@/lib/utils';
 import { Album } from '@/types/types';
-import { useDrop } from 'react-dnd';
+import { useDrag, useDrop } from 'react-dnd';
 
 interface TopAlbumProps {
   album?: Album | null;
-  onDrop: (album: Album) => void;
+  index: number;
+  onDrop: (fromIndex: number, toIndex: number) => void;
 }
 
-function TopAlbum({ album, onDrop }: TopAlbumProps) {
+function TopAlbum({ album, index, onDrop }: TopAlbumProps) {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
-    accept: 'album',
-    drop: (item: { album: Album }) => {
-      onDrop(item.album);
+    accept: 'albumIndex',
+    drop: (item: { index: number }) => {
+      onDrop(item.index, index);
     },
     collect: (monitor) => ({
       isOver: monitor.isOver(),
@@ -19,17 +20,33 @@ function TopAlbum({ album, onDrop }: TopAlbumProps) {
     }),
   }));
 
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: 'albumIndex',
+    item: { index },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  }));
+
   const isActive = canDrop && isOver;
 
-  let albumStyle = 'border h-32 w-32 bg-transparent';
+  let dropStyle = 'bg-transparent';
   if (isActive) {
-    albumStyle = 'border h-32 w-32 bg-primary';
+    dropStyle = 'bg-primary';
   } else if (canDrop) {
-    albumStyle = 'border h-32 w-32 bg-secondary';
+    dropStyle = 'bg-secondary';
+  }
+  let albumStyle = `border h-32 w-32 rounded ${dropStyle}`;
+
+  function dragDropRef(element: HTMLDivElement | null) {
+    if (element) {
+      drag(element);
+      drop(element);
+    }
   }
 
   return album ? (
-    <div ref={drop} className={`${albumStyle}`}>
+    <div ref={dragDropRef} className={albumStyle}>
       <img
         className={`${albumStyle} ${canDrop ? 'opacity-70' : ''}`}
         src={album.images[0]?.url}
@@ -38,7 +55,7 @@ function TopAlbum({ album, onDrop }: TopAlbumProps) {
       />
     </div>
   ) : (
-    <div ref={drop} className={`${albumStyle}`}></div>
+    <div ref={dragDropRef} className={albumStyle}></div>
   );
 }
 

@@ -66,8 +66,8 @@ function Search({ onImageClick }: SearchProps) {
   const renderAlbums = () =>
     results?.map((album, index) => (
       <ResultAlbum
-        album={album}
         key={index}
+        album={album}
         onClick={album ? () => onImageClick(album) : undefined}
       />
     ));
