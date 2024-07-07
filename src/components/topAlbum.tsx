@@ -5,10 +5,11 @@ import { useDrag, useDrop } from 'react-dnd';
 interface TopAlbumProps {
   album?: Album | null;
   index: number;
+  handleClick: () => void;
   onDrop: (fromIndex: number, toIndex: number) => void;
 }
 
-function TopAlbum({ album, index, onDrop }: TopAlbumProps) {
+function TopAlbum({ album, index, handleClick, onDrop }: TopAlbumProps) {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: 'albumIndex',
     drop: (item: { index: number }) => {
@@ -36,7 +37,7 @@ function TopAlbum({ album, index, onDrop }: TopAlbumProps) {
   } else if (canDrop) {
     dropStyle = 'bg-secondary';
   }
-  let albumStyle = `border h-32 w-32 rounded ${dropStyle}`;
+  let albumStyle = `border h-32 w-32 rounded hover:border-primary hover:cursor-pointer ${dropStyle}`;
 
   function dragDropRef(element: HTMLDivElement | null) {
     if (element) {
@@ -46,7 +47,7 @@ function TopAlbum({ album, index, onDrop }: TopAlbumProps) {
   }
 
   return album ? (
-    <div ref={dragDropRef} className={albumStyle}>
+    <div ref={dragDropRef} onClick={handleClick} className={albumStyle}>
       <img
         className={`${albumStyle} ${canDrop ? 'opacity-70' : ''}`}
         src={album.images[0]?.url}
@@ -55,7 +56,7 @@ function TopAlbum({ album, index, onDrop }: TopAlbumProps) {
       />
     </div>
   ) : (
-    <div ref={dragDropRef} className={albumStyle}></div>
+    <div ref={dragDropRef} onClick={handleClick} className={albumStyle}></div>
   );
 }
 

@@ -1,5 +1,11 @@
 'use client';
 
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { Album } from '@/types/types';
 import debounce from 'lodash.debounce';
 import { useCallback, useEffect, useState } from 'react';
@@ -9,16 +15,22 @@ import { Input } from './ui/input';
 import { Skeleton } from './ui/skeleton';
 
 interface SearchProps {
+  open: number | null;
+  setOpen: (index: number | null) => void;
   onImageClick: (album: Album) => void;
 }
 
-function Search({ onImageClick }: SearchProps) {
+function SearchDialog({ open, setOpen, onImageClick }: SearchProps) {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [results, setResults] = useState<Array<Album | null>>(
     Array(9).fill(null)
   );
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const closeModal = () => {
+    setOpen(null);
+  };
 
   const handleSearch = async (newSearchTerm: string) => {
     if (newSearchTerm.trim() === '') {
@@ -78,26 +90,33 @@ function Search({ onImageClick }: SearchProps) {
     ));
 
   return (
-    <div className="w-full px-5">
-      <div className="flex flex-row gap-2 align-center">
-        <Input
-          className="w-full"
-          placeholder="Search for an album..."
-          type="text"
-          autoFocus
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        {searchTerm !== '' && <Button onClick={clearSearch}>Clear</Button>}
-      </div>
+    <Dialog open={open !== null} onOpenChange={closeModal}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Add Album</DialogTitle>
+        </DialogHeader>
+        <div className="w-full px-5">
+          <div className="flex flex-row gap-2 align-center">
+            <Input
+              className="w-full"
+              placeholder="Search for an album..."
+              type="text"
+              autoFocus
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            {searchTerm !== '' && <Button onClick={clearSearch}>Clear</Button>}
+          </div>
 
-      {error && <p>{error}</p>}
+          {error && <p>{error}</p>}
 
-      <div className="grid grid-cols-3 gap-4 h-full py-4">
-        {loading ? renderSkeletons() : renderAlbums()}
-      </div>
-    </div>
+          <div className="grid grid-cols-3 gap-4 h-full py-4">
+            {loading ? renderSkeletons() : renderAlbums()}
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
 
-export default Search;
+export default SearchDialog;
