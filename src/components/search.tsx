@@ -14,7 +14,9 @@ interface SearchProps {
 
 function Search({ onImageClick }: SearchProps) {
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [results, setResults] = useState<Album[] | null>(null);
+  const [results, setResults] = useState<Array<Album | null>>(
+    Array(9).fill(null)
+  );
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -42,7 +44,7 @@ function Search({ onImageClick }: SearchProps) {
 
   const clearSearch = () => {
     setSearchTerm('');
-    setResults(null);
+    setResults(Array(9).fill(null));
     setError(null);
   };
 
@@ -52,7 +54,7 @@ function Search({ onImageClick }: SearchProps) {
   );
 
   useEffect(() => {
-    setResults(null);
+    setResults(Array(9).fill(null));
     setLoading(true);
     if (searchTerm.trim() !== '') {
       debouncedSearch(searchTerm);
@@ -61,12 +63,13 @@ function Search({ onImageClick }: SearchProps) {
     }
   }, [searchTerm]);
 
-  const renderEmptyDivs = () =>
-    Array.from({ length: 9 }).map((_, index) => <ResultAlbum key={index} />);
-
   const renderAlbums = () =>
-    results?.map((album: Album) => (
-      <ResultAlbum album={album} onClick={() => onImageClick(album)} />
+    results?.map((album, index) => (
+      <ResultAlbum
+        album={album}
+        key={index}
+        onClick={album ? () => onImageClick(album) : undefined}
+      />
     ));
 
   const renderSkeletons = () =>
@@ -91,10 +94,7 @@ function Search({ onImageClick }: SearchProps) {
       {error && <p>{error}</p>}
 
       <div className="grid grid-cols-3 gap-4 h-full py-4">
-        {(results === null || results.length === 0) && !loading
-          ? renderEmptyDivs()
-          : renderAlbums()}
-        {loading && renderSkeletons()}
+        {loading ? renderSkeletons() : renderAlbums()}
       </div>
     </div>
   );
