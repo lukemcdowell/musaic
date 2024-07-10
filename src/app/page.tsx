@@ -5,9 +5,10 @@ import InfoDialog from '@/components/infoDialog';
 import SearchDialog from '@/components/searchDialog';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
+import '@/styles/fade.css';
 import { Album } from '@/types/types';
 import { CirclePlus, CircleX } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [topAlbums, setTopAlbums] = useState<Array<Album | null>>(
@@ -15,10 +16,11 @@ export default function Home() {
   );
   const [openModal, setOpenModal] = useState(false);
   const [gridIndex, setGridIndex] = useState(-1);
+  const [loaded, setLoaded] = useState(false);
 
   const { toast } = useToast();
 
-  const isGridEmpty = topAlbums.every((album) => album === null);
+  const gridNotEmpty = topAlbums.some((album) => album !== null);
 
   const addAlbumToGridIndex = (album: Album, index: number) => {
     const newTopAlbums = [...topAlbums];
@@ -58,7 +60,22 @@ export default function Home() {
 
   const clearGrid = () => {
     setTopAlbums(Array(20).fill(null));
+    localStorage.setItem('topAlbums', JSON.stringify(Array(20).fill(null)));
   };
+
+  useEffect(() => {
+    if (gridNotEmpty) {
+      localStorage.setItem('topAlbums', JSON.stringify(topAlbums));
+    }
+  }, [topAlbums]);
+
+  useEffect(() => {
+    const topAlbums = localStorage.getItem('topAlbums');
+    if (topAlbums) {
+      setTopAlbums(JSON.parse(topAlbums));
+    }
+    setLoaded(true);
+  }, []);
 
   return (
     <>
@@ -73,22 +90,25 @@ export default function Home() {
               </div>
               Add Albums
             </Button>
-            {!isGridEmpty && (
-              <Button onClick={clearGrid}>
-                <div className="pr-2">
-                  <CircleX />
-                </div>
-                Clear
-              </Button>
-            )}
+            <Button
+              onClick={clearGrid}
+              disabled={!gridNotEmpty}
+            >
+              <div className="pr-2">
+                <CircleX />
+              </div>
+              Clear
+            </Button>
           </div>
         </div>
 
-        <Grid
-          topAlbums={topAlbums}
-          setTopAlbums={setTopAlbums}
-          handleAlbumClick={handleAlbumClick}
-        />
+        <div className={`fade-in ${loaded ? 'visible' : ''}`}>
+          <Grid
+            topAlbums={topAlbums}
+            setTopAlbums={setTopAlbums}
+            handleAlbumClick={handleAlbumClick}
+          />
+        </div>
       </div>
 
       <SearchDialog
