@@ -7,14 +7,14 @@ interface TopAlbumProps {
   album: Album | null;
   index: number;
   handleAlbumClick: () => void;
-  onDrop: (fromIndex: number, toIndex: number) => void;
+  moveAlbum: (fromIndex: number, toIndex: number) => void;
 }
 
-function TopAlbum({ album, index, handleAlbumClick, onDrop }: TopAlbumProps) {
+function TopAlbum({ album, index, handleAlbumClick, moveAlbum }: TopAlbumProps) {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: 'albumIndex',
     drop: (item: { index: number }) => {
-      onDrop(item.index, index);
+      moveAlbum(item.index, index);
     },
     collect: (monitor) => ({
       isOver: monitor.isOver(),
