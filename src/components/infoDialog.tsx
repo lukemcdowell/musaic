@@ -6,13 +6,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Info } from 'lucide-react';
 import { Button } from './ui/button';
 
 function InfoDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Info</Button>
+        <Button variant="outline">
+          <div className="pr-2">
+            <Info />
+          </div>
+          Info
+        </Button>
       </DialogTrigger>
       <DialogContent className="w-fit">
         <DialogHeader>

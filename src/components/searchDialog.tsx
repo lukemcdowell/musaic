@@ -44,7 +44,6 @@ function SearchDialog({
 
   const handleClick = (album: Album) => {
     addAlbumToGrid(album, gridIndex);
-    closeModal();
   };
 
   const handleSearch = async (newSearchTerm: string) => {
@@ -108,7 +107,7 @@ function SearchDialog({
     <Dialog open={open} onOpenChange={closeModal}>
       <DialogContent className="min-w-max">
         <DialogHeader>
-          <DialogTitle>Add Album</DialogTitle>
+          <DialogTitle>Add Album{gridIndex === -1 ? 's' : ''}</DialogTitle>
         </DialogHeader>
         <div>
           <div className="flex flex-row gap-2 align-center">

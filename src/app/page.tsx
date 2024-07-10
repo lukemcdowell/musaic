@@ -4,7 +4,9 @@ import Grid from '@/components/grid';
 import InfoDialog from '@/components/infoDialog';
 import SearchDialog from '@/components/searchDialog';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
 import { Album } from '@/types/types';
+import { CirclePlus, CircleX } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Home() {
@@ -12,12 +14,36 @@ export default function Home() {
     Array(20).fill(null)
   );
   const [openModal, setOpenModal] = useState(false);
-  const [gridIndex, setGridIndex] = useState(0);
+  const [gridIndex, setGridIndex] = useState(-1);
 
-  const addAlbumToGrid = (album: Album, index: number) => {
+  const { toast } = useToast();
+
+  const isGridEmpty = topAlbums.every((album) => album === null);
+
+  const addAlbumToGridIndex = (album: Album, index: number) => {
     const newTopAlbums = [...topAlbums];
     newTopAlbums[index] = album;
     setTopAlbums(newTopAlbums);
+
+    confirmationMessage(album);
+    setOpenModal(false);
+  };
+
+  const addAlbumToFirstEmptySquare = (album: Album) => {
+    const firstEmptyIndex = topAlbums.findIndex((album) => album === null);
+    if (firstEmptyIndex !== -1) {
+      const newTopAlbums = [...topAlbums];
+      newTopAlbums[firstEmptyIndex] = album;
+      setTopAlbums(newTopAlbums);
+
+      confirmationMessage(album);
+    }
+  };
+
+  const confirmationMessage = (album: Album) => {
+    toast({
+      description: `Added ${album.name} by ${album.artists[0].name} to the grid`,
+    });
   };
 
   const handleAlbumClick = (index: number) => {
@@ -25,18 +51,36 @@ export default function Home() {
     setGridIndex(index);
   };
 
+  const openModalWithNoIndex = () => {
+    setOpenModal(true);
+    setGridIndex(-1);
+  };
+
   const clearGrid = () => {
     setTopAlbums(Array(20).fill(null));
   };
 
   return (
-    <main className="max-w-max min-h-screen m-auto">
+    <>
       <div className="flex w-full min-h-screen flex-col items-center">
         <div className="flex w-full justify-between py-6">
           <h1 className="text-4xl font-bold text-center">Top Album Grid</h1>
           <div className="flex gap-2">
             <InfoDialog />
-            <Button onClick={clearGrid}>Clear</Button>
+            <Button variant="outline" onClick={openModalWithNoIndex}>
+              <div className="pr-2">
+                <CirclePlus />
+              </div>
+              Add Albums
+            </Button>
+            {!isGridEmpty && (
+              <Button onClick={clearGrid}>
+                <div className="pr-2">
+                  <CircleX />
+                </div>
+                Clear
+              </Button>
+            )}
           </div>
         </div>
 
@@ -51,8 +95,10 @@ export default function Home() {
         open={openModal}
         setOpen={setOpenModal}
         gridIndex={gridIndex}
-        addAlbumToGrid={addAlbumToGrid}
+        addAlbumToGrid={
+          gridIndex !== -1 ? addAlbumToGridIndex : addAlbumToFirstEmptySquare
+        }
       />
-    </main>
+    </>
   );
 }
