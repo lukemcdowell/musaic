@@ -35,6 +35,8 @@ function SearchDialog({
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
+  const emptyResults = results.length === 0 && searchTerm !== '';
+
   const closeModal = () => {
     setOpen(false);
     clearSearch();
@@ -122,6 +124,9 @@ function SearchDialog({
           </div>
 
           {error && <p>{error}</p>}
+          {!error && !loading && emptyResults && (
+            <p className="text-center pt-8">No Results Found</p>
+          )}
 
           <div className="grid grid-cols-3 gap-2 pt-4">
             {loading ? renderSkeletons() : renderAlbums()}
