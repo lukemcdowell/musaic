@@ -6,6 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { SQUARE_DIMENSIONS } from '@/constants/constants';
 import { Album } from '@/types/types';
 import debounce from 'lodash.debounce';
 import { useCallback, useEffect, useState } from 'react';
@@ -30,6 +31,7 @@ function SearchDialog({ open, setOpen, onImageClick }: SearchProps) {
 
   const closeModal = () => {
     setOpen(null);
+    clearSearch();
   };
 
   const handleSearch = async (newSearchTerm: string) => {
@@ -86,19 +88,19 @@ function SearchDialog({ open, setOpen, onImageClick }: SearchProps) {
 
   const renderSkeletons = () =>
     Array.from({ length: 9 }).map((_, index) => (
-      <Skeleton key={index} className="h-32 w-32" />
+      <Skeleton key={index} className={`${SQUARE_DIMENSIONS}`} />
     ));
 
   return (
     <Dialog open={open !== null} onOpenChange={closeModal}>
-      <DialogContent>
+      <DialogContent className="min-w-max">
         <DialogHeader>
           <DialogTitle>Add Album</DialogTitle>
         </DialogHeader>
-        <div className="w-full px-5">
+        <div>
           <div className="flex flex-row gap-2 align-center">
             <Input
-              className="w-full"
+              className=""
               placeholder="Search for an album..."
               type="text"
               autoFocus
@@ -110,7 +112,7 @@ function SearchDialog({ open, setOpen, onImageClick }: SearchProps) {
 
           {error && <p>{error}</p>}
 
-          <div className="grid grid-cols-3 gap-4 h-full py-4">
+          <div className="grid grid-cols-3 gap-2 pt-4">
             {loading ? renderSkeletons() : renderAlbums()}
           </div>
         </div>

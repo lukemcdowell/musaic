@@ -1,3 +1,4 @@
+import { SQUARE_DIMENSIONS } from '@/constants/constants';
 import { joinArtists } from '@/lib/utils';
 import { Album } from '@/types/types';
 
@@ -9,7 +10,7 @@ interface ResultAlbumProps {
 function ResultAlbum({ album, onClick }: ResultAlbumProps) {
   return album ? (
     <div
-      className={`border h-32 w-32 rounded cursor-pointer`}
+      className={`border ${SQUARE_DIMENSIONS} rounded cursor-pointer`}
       onClick={onClick}
     >
       <img
@@ -19,7 +20,7 @@ function ResultAlbum({ album, onClick }: ResultAlbumProps) {
       />
     </div>
   ) : (
-    <div className="border h-32 w-32 rounded"></div>
+    <div className={`border ${SQUARE_DIMENSIONS} rounded`}></div>
   );
 }
 

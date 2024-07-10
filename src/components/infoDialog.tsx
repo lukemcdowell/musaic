@@ -14,7 +14,7 @@ function InfoDialog() {
       <DialogTrigger asChild>
         <Button variant="outline">Info</Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="w-fit">
         <DialogHeader>
           <DialogTitle>Information</DialogTitle>
           <DialogDescription>
