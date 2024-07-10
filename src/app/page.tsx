@@ -11,7 +11,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 
 export default function Home() {
   const [topAlbums, setTopAlbums] = useState<Array<Album | null>>(
-    Array(25).fill(null)
+    Array(20).fill(null)
   );
   const [openModal, setOpenModal] = useState<number | null>(null);
 
@@ -36,14 +36,14 @@ export default function Home() {
   };
 
   const clearGrid = () => {
-    setTopAlbums(Array(25).fill(null));
+    setTopAlbums(Array(20).fill(null));
   };
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <main className="max-w-screen-md min-h-screen m-auto">
+      <main className="max-w-max min-h-screen m-auto">
         <div className="flex w-full min-h-screen flex-col items-center">
-          <div className="flex w-full justify-between py-6 px-12">
+          <div className="flex w-full justify-between py-6">
             <h1 className="text-4xl font-bold text-center">Top Album Grid</h1>
             <div className="flex gap-2">
               <InfoDialog />

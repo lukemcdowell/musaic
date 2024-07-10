@@ -1,3 +1,4 @@
+import { SQUARE_DIMENSIONS } from '@/constants/constants';
 import { joinArtists } from '@/lib/utils';
 import { Album } from '@/types/types';
 import { useDrag, useDrop } from 'react-dnd';
@@ -37,7 +38,7 @@ function TopAlbum({ album, index, handleClick, onDrop }: TopAlbumProps) {
   } else if (canDrop) {
     dropStyle = 'bg-secondary';
   }
-  let albumStyle = `border h-32 w-32 rounded hover:border-primary hover:cursor-pointer ${dropStyle}`;
+  let albumStyle = `border ${SQUARE_DIMENSIONS} rounded hover:border-primary hover:cursor-pointer ${dropStyle}`;
 
   function dragDropRef(element: HTMLDivElement | null) {
     if (element) {
