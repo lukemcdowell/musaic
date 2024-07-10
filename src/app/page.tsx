@@ -22,6 +22,8 @@ export default function Home() {
 
   const gridNotEmpty = topAlbums.some((album) => album !== null);
 
+  const gridFull = topAlbums.every((album) => album !== null);
+
   const addAlbumToGridIndex = (album: Album, index: number) => {
     const newTopAlbums = [...topAlbums];
     newTopAlbums[index] = album;
@@ -70,10 +72,27 @@ export default function Home() {
   }, [topAlbums]);
 
   useEffect(() => {
-    const topAlbums = localStorage.getItem('topAlbums');
-    if (topAlbums) {
-      setTopAlbums(JSON.parse(topAlbums));
+    async function fetchData() {
+      try {
+        const response = await fetch('/mock/topAlbums.json');
+        const jsonData = await response.json();
+        setTopAlbums(jsonData);
+        localStorage.setItem('topAlbums', JSON.stringify(jsonData));
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     }
+
+    const storedTopAlbums = localStorage.getItem('topAlbums');
+    if (
+      !storedTopAlbums ||
+      JSON.parse(storedTopAlbums).every((album: Album) => album === null)
+    ) {
+      fetchData();
+    } else {
+      setTopAlbums(JSON.parse(storedTopAlbums));
+    }
+
     setLoaded(true);
   }, []);
 
@@ -84,16 +103,17 @@ export default function Home() {
           <h1 className="text-4xl font-bold text-center">Top Album Grid</h1>
           <div className="flex gap-2">
             <InfoDialog />
-            <Button variant="outline" onClick={openModalWithNoIndex}>
+            <Button
+              variant="outline"
+              onClick={openModalWithNoIndex}
+              disabled={gridFull}
+            >
               <div className="pr-2">
                 <CirclePlus />
               </div>
               Add Albums
             </Button>
-            <Button
-              onClick={clearGrid}
-              disabled={!gridNotEmpty}
-            >
+            <Button onClick={clearGrid} disabled={!gridNotEmpty}>
               <div className="pr-2">
                 <CircleX />
               </div>

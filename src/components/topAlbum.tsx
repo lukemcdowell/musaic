@@ -45,7 +45,7 @@ function TopAlbum({
 
   let dropStyle = 'bg-transparent';
   if (isActive) {
-    dropStyle = 'bg-primary';
+    dropStyle = 'border-primary';
   } else if (canDrop) {
     dropStyle = 'bg-secondary';
   }

@@ -3,7 +3,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import path from 'path';
 
 async function loadMockData() {
-  const mockDataPath = path.join(process.cwd(), '/src/mock/mockAlbums.json');
+  const mockDataPath = path.join(
+    process.cwd(),
+    '/src/mock/mockAlbumResults.json'
+  );
   const mockData = await fs.readFile(mockDataPath, 'utf8');
   return JSON.parse(mockData);
 }
@@ -13,7 +16,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const query = searchParams.get('query');
 
-  if (process.env.USE_MOCK_API === 'true') {
+  if (process.env.MOCK === 'true') {
     const mockData = await loadMockData();
     return NextResponse.json(mockData);
   }
