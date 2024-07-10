@@ -14,10 +14,7 @@ function InfoDialog() {
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline">
-          <div className="pr-2">
-            <Info />
-          </div>
-          Info
+          <Info />
         </Button>
       </DialogTrigger>
       <DialogContent className="w-fit">

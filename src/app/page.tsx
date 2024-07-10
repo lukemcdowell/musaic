@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import '@/styles/fade.css';
 import { Album } from '@/types/types';
-import { CirclePlus, CircleX } from 'lucide-react';
+import { CirclePlus, CircleX, Download, Share } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
@@ -106,18 +106,26 @@ export default function Home() {
             <Button
               variant="outline"
               onClick={openModalWithNoIndex}
+              disabled={!gridNotEmpty}
+            >
+              <Download />
+            </Button>
+            <Button
+              variant="outline"
+              onClick={openModalWithNoIndex}
+              disabled={!gridNotEmpty}
+            >
+              <Share />
+            </Button>
+            <Button
+              variant="outline"
+              onClick={openModalWithNoIndex}
               disabled={gridFull}
             >
-              <div className="pr-2">
-                <CirclePlus />
-              </div>
-              Add Albums
+              <CirclePlus />
             </Button>
             <Button onClick={clearGrid} disabled={!gridNotEmpty}>
-              <div className="pr-2">
-                <CircleX />
-              </div>
-              Clear
+              <CircleX />
             </Button>
           </div>
         </div>
