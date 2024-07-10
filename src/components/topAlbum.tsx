@@ -4,13 +4,13 @@ import { Album } from '@/types/types';
 import { useDrag, useDrop } from 'react-dnd';
 
 interface TopAlbumProps {
-  album?: Album | null;
+  album: Album | null;
   index: number;
-  handleClick: () => void;
+  handleAlbumClick: () => void;
   onDrop: (fromIndex: number, toIndex: number) => void;
 }
 
-function TopAlbum({ album, index, handleClick, onDrop }: TopAlbumProps) {
+function TopAlbum({ album, index, handleAlbumClick, onDrop }: TopAlbumProps) {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: 'albumIndex',
     drop: (item: { index: number }) => {
@@ -48,7 +48,7 @@ function TopAlbum({ album, index, handleClick, onDrop }: TopAlbumProps) {
   }
 
   return album ? (
-    <div ref={dragDropRef} onClick={handleClick} className={albumStyle}>
+    <div ref={dragDropRef} onClick={handleAlbumClick} className={albumStyle}>
       <img
         className={`${albumStyle} ${canDrop ? 'opacity-70' : ''}`}
         src={album.images[0]?.url}
@@ -57,7 +57,11 @@ function TopAlbum({ album, index, handleClick, onDrop }: TopAlbumProps) {
       />
     </div>
   ) : (
-    <div ref={dragDropRef} onClick={handleClick} className={albumStyle}></div>
+    <div
+      ref={dragDropRef}
+      onClick={handleAlbumClick}
+      className={albumStyle}
+    ></div>
   );
 }
 

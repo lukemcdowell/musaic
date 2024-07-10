@@ -16,12 +16,18 @@ import { Input } from './ui/input';
 import { Skeleton } from './ui/skeleton';
 
 interface SearchProps {
-  open: number | null;
-  setOpen: (index: number | null) => void;
-  onImageClick: (album: Album) => void;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  gridIndex: number;
+  addAlbumToGrid: (album: Album, index: number) => void;
 }
 
-function SearchDialog({ open, setOpen, onImageClick }: SearchProps) {
+function SearchDialog({
+  open,
+  setOpen,
+  gridIndex,
+  addAlbumToGrid,
+}: SearchProps) {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [results, setResults] = useState<Array<Album | null>>(
     Array(9).fill(null)
@@ -30,8 +36,13 @@ function SearchDialog({ open, setOpen, onImageClick }: SearchProps) {
   const [loading, setLoading] = useState<boolean>(false);
 
   const closeModal = () => {
-    setOpen(null);
+    setOpen(false);
     clearSearch();
+  };
+
+  const handleClick = (album: Album) => {
+    addAlbumToGrid(album, gridIndex);
+    closeModal();
   };
 
   const handleSearch = async (newSearchTerm: string) => {
@@ -82,7 +93,7 @@ function SearchDialog({ open, setOpen, onImageClick }: SearchProps) {
       <ResultAlbum
         key={index}
         album={album}
-        onClick={album ? () => onImageClick(album) : undefined}
+        onClick={album ? () => handleClick(album) : undefined}
       />
     ));
 
@@ -92,7 +103,7 @@ function SearchDialog({ open, setOpen, onImageClick }: SearchProps) {
     ));
 
   return (
-    <Dialog open={open !== null} onOpenChange={closeModal}>
+    <Dialog open={open} onOpenChange={closeModal}>
       <DialogContent className="min-w-max">
         <DialogHeader>
           <DialogTitle>Add Album</DialogTitle>

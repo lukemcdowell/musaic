@@ -13,15 +13,18 @@ export default function Home() {
   const [topAlbums, setTopAlbums] = useState<Array<Album | null>>(
     Array(20).fill(null)
   );
-  const [openModal, setOpenModal] = useState<number | null>(null);
+  const [openModal, setOpenModal] = useState(false);
+  const [gridIndex, setGridIndex] = useState(0);
 
-  const handleImageClick = (album: Album) => {
-    const firstEmptyIndex = topAlbums.findIndex((album) => album === null);
-    if (firstEmptyIndex !== -1) {
-      const newTopAlbums = [...topAlbums];
-      newTopAlbums[firstEmptyIndex] = album;
-      setTopAlbums(newTopAlbums);
-    }
+  const addAlbumToGrid = (album: Album, index: number) => {
+    const newTopAlbums = [...topAlbums];
+    newTopAlbums[index] = album;
+    setTopAlbums(newTopAlbums);
+  };
+
+  const handleAlbumClick = (index: number) => {
+    setOpenModal(true);
+    setGridIndex(index);
   };
 
   const handleDrop = (fromIndex: number, toIndex: number) => {
@@ -57,16 +60,18 @@ export default function Home() {
                 key={index}
                 album={album}
                 index={index}
-                handleClick={() => setOpenModal(index)}
+                handleAlbumClick={() => handleAlbumClick(index)}
                 onDrop={handleDrop}
               />
             ))}
           </div>
         </div>
+
         <SearchDialog
           open={openModal}
           setOpen={setOpenModal}
-          onImageClick={handleImageClick}
+          gridIndex={gridIndex}
+          addAlbumToGrid={addAlbumToGrid}
         />
       </main>
     </DndProvider>
