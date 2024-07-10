@@ -40,7 +40,11 @@ export default function Home() {
           </div>
         </div>
 
-        <Grid topAlbums={topAlbums} handleAlbumClick={handleAlbumClick} />
+        <Grid
+          topAlbums={topAlbums}
+          setTopAlbums={setTopAlbums}
+          handleAlbumClick={handleAlbumClick}
+        />
       </div>
 
       <SearchDialog

@@ -1,34 +1,45 @@
 import { SQUARE_DIMENSIONS } from '@/constants/constants';
 import { joinArtists } from '@/lib/utils';
 import { Album } from '@/types/types';
+import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
 interface TopAlbumProps {
   album: Album | null;
   index: number;
   handleAlbumClick: () => void;
-  moveAlbum: (fromIndex: number, toIndex: number) => void;
+  moveAlbum: (dragIndex: number, hoverIndex: number) => void;
 }
 
-function TopAlbum({ album, index, handleAlbumClick, moveAlbum }: TopAlbumProps) {
-  const [{ canDrop, isOver }, drop] = useDrop(() => ({
-    accept: 'albumIndex',
-    drop: (item: { index: number }) => {
-      moveAlbum(item.index, index);
+function TopAlbum({
+  album,
+  index,
+  handleAlbumClick,
+  moveAlbum,
+}: TopAlbumProps) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const [{ isDragging }, drag] = useDrag({
+    type: 'album',
+    item: { index },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+
+  const [{ canDrop, isOver }, drop] = useDrop({
+    accept: 'album',
+    hover: (item: { index: number }) => {
+      if (item.index !== index) {
+        moveAlbum(item.index, index);
+        item.index = index;
+      }
     },
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),
-  }));
-
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: 'albumIndex',
-    item: { index },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  }));
+  });
 
   const isActive = canDrop && isOver;
 
@@ -40,28 +51,19 @@ function TopAlbum({ album, index, handleAlbumClick, moveAlbum }: TopAlbumProps) 
   }
   let albumStyle = `border ${SQUARE_DIMENSIONS} rounded hover:border-primary hover:cursor-pointer ${dropStyle}`;
 
-  function dragDropRef(element: HTMLDivElement | null) {
-    if (element) {
-      drag(element);
-      drop(element);
-    }
-  }
+  drag(drop(ref));
 
-  return album ? (
-    <div ref={dragDropRef} onClick={handleAlbumClick} className={albumStyle}>
-      <img
-        className={`${albumStyle} ${canDrop ? 'opacity-70' : ''}`}
-        src={album.images[0]?.url}
-        alt={album.name}
-        title={`${album.name} - ${joinArtists(album.artists)}`}
-      />
+  return (
+    <div ref={ref} onClick={handleAlbumClick} className={albumStyle}>
+      {album && (
+        <img
+          className={`${canDrop ? 'opacity-70' : ''}`}
+          src={album.images[0]?.url}
+          alt={album.name}
+          title={`${album.name} - ${joinArtists(album.artists)}`}
+        />
+      )}
     </div>
-  ) : (
-    <div
-      ref={dragDropRef}
-      onClick={handleAlbumClick}
-      className={albumStyle}
-    ></div>
   );
 }
 
