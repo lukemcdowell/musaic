@@ -101,7 +101,9 @@ export default function Home() {
         <div className="flex w-full justify-between py-6">
           <div className="flex items-center gap-4">
             <Logo />
-            <h1 className="text-4xl font-bold text-center">Musaic</h1>
+            <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+              Musaic
+            </h1>
           </div>
           <Controls
             openModalWithNoIndex={openModalWithNoIndex}
