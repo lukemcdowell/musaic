@@ -23,7 +23,7 @@ function Grid({ topAlbums, setTopAlbums, handleAlbumClick }: GridProps) {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="grid grid-cols-5 gap-2 h-full">
+      <div className="grid gap-2 h-full grid-cols-2 sm:grid-cols-4 lg:grid-cols-5">
         {topAlbums.map((album, index) => (
           <TopAlbum
             key={index}
