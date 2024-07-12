@@ -25,7 +25,7 @@ function Controls({
   const [openModal, setOpenModal] = useState(false);
 
   return (
-    <div className="flex gap-2">
+    <div className="flex items-center gap-2">
       <TooltipProvider delayDuration={0}>
         <Tooltip>
           <TooltipTrigger asChild>
@@ -33,7 +33,7 @@ function Controls({
               <Info />
             </Button>
           </TooltipTrigger>
-          <TooltipContent>How to use</TooltipContent>
+          <TooltipContent>How to Use Musaic</TooltipContent>
         </Tooltip>
 
         <Tooltip>
@@ -48,7 +48,7 @@ function Controls({
               </Button>
             </span>
           </TooltipTrigger>
-          <TooltipContent>Download grid</TooltipContent>
+          <TooltipContent>Download Your Musaic</TooltipContent>
         </Tooltip>
 
         <Tooltip>
@@ -63,7 +63,7 @@ function Controls({
               </Button>
             </span>
           </TooltipTrigger>
-          <TooltipContent>Share grid</TooltipContent>
+          <TooltipContent>Share Your Musaic</TooltipContent>
         </Tooltip>
 
         <Tooltip>
@@ -78,7 +78,7 @@ function Controls({
               </Button>
             </span>
           </TooltipTrigger>
-          <TooltipContent>Add albums</TooltipContent>
+          <TooltipContent>Add Albums to Musaic</TooltipContent>
         </Tooltip>
 
         <Tooltip>
@@ -89,7 +89,7 @@ function Controls({
               </Button>
             </span>
           </TooltipTrigger>
-          <TooltipContent>Clear grid</TooltipContent>
+          <TooltipContent>Clear Your Musaic</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 
