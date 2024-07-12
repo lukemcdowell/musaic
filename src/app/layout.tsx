@@ -6,8 +6,8 @@ import '../styles/globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Top Albums',
-  description: 'Web app to create a grid of your top albums',
+  title: 'Musaic',
+  description: 'Web app to create a mosaic of your favourite albums',
 };
 
 export default function RootLayout({
