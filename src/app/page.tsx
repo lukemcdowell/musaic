@@ -1,13 +1,11 @@
 'use client';
 
+import Controls from '@/components/controls';
 import Grid from '@/components/grid';
-import InfoDialog from '@/components/infoDialog';
 import SearchDialog from '@/components/searchDialog';
-import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import '@/styles/fade.css';
 import { Album } from '@/types/types';
-import { CirclePlus, CircleX, Download, Share } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
@@ -101,33 +99,12 @@ export default function Home() {
       <div className="flex w-full min-h-screen flex-col items-center">
         <div className="flex w-full justify-between py-6">
           <h1 className="text-4xl font-bold text-center">Top Album Grid</h1>
-          <div className="flex gap-2">
-            <InfoDialog />
-            <Button
-              variant="outline"
-              onClick={openModalWithNoIndex}
-              disabled={!gridNotEmpty}
-            >
-              <Download />
-            </Button>
-            <Button
-              variant="outline"
-              onClick={openModalWithNoIndex}
-              disabled={!gridNotEmpty}
-            >
-              <Share />
-            </Button>
-            <Button
-              variant="outline"
-              onClick={openModalWithNoIndex}
-              disabled={gridFull}
-            >
-              <CirclePlus />
-            </Button>
-            <Button onClick={clearGrid} disabled={!gridNotEmpty}>
-              <CircleX />
-            </Button>
-          </div>
+          <Controls
+            openModalWithNoIndex={openModalWithNoIndex}
+            gridNotEmpty={gridNotEmpty}
+            gridFull={gridFull}
+            clearGrid={clearGrid}
+          />
         </div>
 
         <div className={`fade-in ${loaded ? 'visible' : ''}`}>
