@@ -2,6 +2,7 @@
 
 import Controls from '@/components/controls';
 import Grid from '@/components/grid';
+import Logo from '@/components/logo';
 import SearchDialog from '@/components/searchDialog';
 import { useToast } from '@/components/ui/use-toast';
 import '@/styles/fade.css';
@@ -98,7 +99,10 @@ export default function Home() {
     <>
       <div className="flex w-full min-h-screen flex-col items-center">
         <div className="flex w-full justify-between py-6">
-          <h1 className="text-4xl font-bold text-center">Top Album Grid</h1>
+          <div className="flex items-center gap-4">
+            <Logo />
+            <h1 className="text-4xl font-bold text-center">Musaic</h1>
+          </div>
           <Controls
             openModalWithNoIndex={openModalWithNoIndex}
             gridNotEmpty={gridNotEmpty}

@@ -38,48 +38,56 @@ function Controls({
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button
-              variant="outline"
-              onClick={openModalWithNoIndex}
-              disabled={!gridNotEmpty}
-            >
-              <Download />
-            </Button>
+            <span>
+              <Button
+                variant="outline"
+                onClick={openModalWithNoIndex}
+                disabled={!gridNotEmpty}
+              >
+                <Download />
+              </Button>
+            </span>
           </TooltipTrigger>
           <TooltipContent>Download grid</TooltipContent>
         </Tooltip>
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button
-              variant="outline"
-              onClick={openModalWithNoIndex}
-              disabled={!gridNotEmpty}
-            >
-              <Share />
-            </Button>
+            <span>
+              <Button
+                variant="outline"
+                onClick={openModalWithNoIndex}
+                disabled={!gridNotEmpty}
+              >
+                <Share />
+              </Button>
+            </span>
           </TooltipTrigger>
           <TooltipContent>Share grid</TooltipContent>
         </Tooltip>
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button
-              variant="outline"
-              onClick={openModalWithNoIndex}
-              disabled={gridFull}
-            >
-              <CirclePlus />
-            </Button>
+            <span>
+              <Button
+                variant="outline"
+                onClick={openModalWithNoIndex}
+                disabled={gridFull}
+              >
+                <CirclePlus />
+              </Button>
+            </span>
           </TooltipTrigger>
           <TooltipContent>Add albums</TooltipContent>
         </Tooltip>
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button onClick={clearGrid} disabled={!gridNotEmpty}>
-              <CircleX />
-            </Button>
+            <span>
+              <Button onClick={clearGrid} disabled={!gridNotEmpty}>
+                <CircleX />
+              </Button>
+            </span>
           </TooltipTrigger>
           <TooltipContent>Clear grid</TooltipContent>
         </Tooltip>
