@@ -5,17 +5,21 @@ interface LogoProps {
 }
 
 function Logo({ size = 'small' }: LogoProps) {
-  const sizeClass = size === 'small' ? 'w-4 h-4' : 'w-14 h-14';
+  const sizeClass = size === 'small' ? 'w-4 h-4' : 'w-12 h-12';
 
   const square = (classToAdd?: string) => (
     <div
-      className={cn(sizeClass, 'border border-primary rounded', classToAdd)}
+      className={cn(
+        sizeClass,
+        'border border-primary rounded hover:bg-primary',
+        classToAdd
+      )}
     ></div>
   );
 
   return (
     <div className="grid grid-cols-2 gap-1">
-      {square('bg-primary')}
+      {square('bg-primary hover:bg-black')}
       {square()}
       {square()}
       {square()}
