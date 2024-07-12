@@ -4,31 +4,20 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@radix-ui/react-tooltip';
-import { Info } from 'lucide-react';
-import { Button } from './ui/button';
 
-function InfoDialog() {
+interface InfoDialogProps {
+  openModal: boolean;
+  setOpenModal: (open: boolean) => void;
+}
+
+function InfoDialog({ openModal, setOpenModal }: InfoDialogProps) {
+  const closeModal = () => {
+    setOpenModal(false);
+  };
+
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button variant="outline">
-              <Info />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Tooltip</p>
-          </TooltipContent>
-        </Tooltip>
-      </DialogTrigger>
+    <Dialog open={openModal} onOpenChange={closeModal}>
       <DialogContent className="w-fit">
         <DialogHeader>
           <DialogTitle>Information</DialogTitle>

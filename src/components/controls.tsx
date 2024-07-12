@@ -3,8 +3,10 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@radix-ui/react-tooltip';
-import { CirclePlus, CircleX, Share } from 'lucide-react';
+} from '@/components/ui/tooltip';
+import { CirclePlus, CircleX, Download, Info, Share } from 'lucide-react';
+import { useState } from 'react';
+import InfoDialog from './infoDialog';
 import { Button } from './ui/button';
 
 interface ControlsProps {
@@ -20,10 +22,19 @@ function Controls({
   gridFull,
   clearGrid,
 }: ControlsProps) {
+  const [openModal, setOpenModal] = useState(false);
+
   return (
     <div className="flex gap-2">
       <TooltipProvider delayDuration={0}>
-        {/* <InfoDialog />
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline" onClick={() => setOpenModal(true)}>
+              <Info />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>How to use</TooltipContent>
+        </Tooltip>
 
         <Tooltip>
           <TooltipTrigger asChild>
@@ -35,40 +46,46 @@ function Controls({
               <Download />
             </Button>
           </TooltipTrigger>
-          <TooltipContent>
-            <p>Tooltip</p>
-          </TooltipContent>
-        </Tooltip> */}
+          <TooltipContent>Download grid</TooltipContent>
+        </Tooltip>
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button variant="outline">Hover</Button>
+            <Button
+              variant="outline"
+              onClick={openModalWithNoIndex}
+              disabled={!gridNotEmpty}
+            >
+              <Share />
+            </Button>
           </TooltipTrigger>
-          <TooltipContent>
-            <p>Add to library</p>
-          </TooltipContent>
+          <TooltipContent>Share grid</TooltipContent>
         </Tooltip>
 
-        <Button
-          variant="outline"
-          onClick={openModalWithNoIndex}
-          disabled={!gridNotEmpty}
-        >
-          <Share />
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="outline"
+              onClick={openModalWithNoIndex}
+              disabled={gridFull}
+            >
+              <CirclePlus />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>Add albums</TooltipContent>
+        </Tooltip>
 
-        <Button
-          variant="outline"
-          onClick={openModalWithNoIndex}
-          disabled={gridFull}
-        >
-          <CirclePlus />
-        </Button>
-
-        <Button onClick={clearGrid} disabled={!gridNotEmpty}>
-          <CircleX />
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button onClick={clearGrid} disabled={!gridNotEmpty}>
+              <CircleX />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>Clear grid</TooltipContent>
+        </Tooltip>
       </TooltipProvider>
+
+      <InfoDialog openModal={openModal} setOpenModal={setOpenModal} />
     </div>
   );
 }
