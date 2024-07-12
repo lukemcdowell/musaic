@@ -44,7 +44,7 @@ function SearchDialog({
 
   const handleClick = (album: Album) => {
     addAlbumToGrid(album, gridIndex);
-    clearSearch();
+    gridIndex !== -1 && clearSearch();
   };
 
   const handleSearch = async (newSearchTerm: string) => {

@@ -49,7 +49,7 @@ function TopAlbum({
   } else if (canDrop) {
     dropStyle = 'bg-secondary';
   }
-  let albumStyle = `border ${SQUARE_DIMENSIONS} rounded hover:border-primary hover:cursor-pointer ${dropStyle}`;
+  let albumStyle = `border ${SQUARE_DIMENSIONS} rounded hover:border-primary hover:opacity-70 hover:cursor-pointer ${dropStyle}`;
 
   drag(drop(ref));
 
