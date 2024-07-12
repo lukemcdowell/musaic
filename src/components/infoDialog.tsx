@@ -47,7 +47,7 @@ function InfoDialog({ openModal, setOpenModal }: InfoDialogProps) {
               </li>
               <li>
                 <strong className="text-primary">Download Grid:</strong> Use the
-                "Download Grid" button to download your grid as an image.
+                "Download As Image" button to download your grid as an image.
               </li>
               <li>
                 <strong className="text-primary">Share Grid:</strong> Use the

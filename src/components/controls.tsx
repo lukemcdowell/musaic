@@ -4,7 +4,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { CirclePlus, CircleX, Download, Info, Share } from 'lucide-react';
+import { CirclePlus, CircleX, Download, Info } from 'lucide-react';
 import { useState } from 'react';
 import InfoDialog from './infoDialog';
 import { Button } from './ui/button';
@@ -48,22 +48,7 @@ function Controls({
               </Button>
             </span>
           </TooltipTrigger>
-          <TooltipContent>Download Your Musaic</TooltipContent>
-        </Tooltip>
-
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <span>
-              <Button
-                variant="outline"
-                onClick={openModalWithNoIndex}
-                disabled={!gridNotEmpty}
-              >
-                <Share />
-              </Button>
-            </span>
-          </TooltipTrigger>
-          <TooltipContent>Share Your Musaic</TooltipContent>
+          <TooltipContent>Download As Image</TooltipContent>
         </Tooltip>
 
         <Tooltip>
@@ -78,7 +63,7 @@ function Controls({
               </Button>
             </span>
           </TooltipTrigger>
-          <TooltipContent>Add Albums to Musaic</TooltipContent>
+          <TooltipContent>Add Albums</TooltipContent>
         </Tooltip>
 
         <Tooltip>
@@ -89,7 +74,7 @@ function Controls({
               </Button>
             </span>
           </TooltipTrigger>
-          <TooltipContent>Clear Your Musaic</TooltipContent>
+          <TooltipContent>Clear Grid</TooltipContent>
         </Tooltip>
       </TooltipProvider>
 
