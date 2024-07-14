@@ -1,5 +1,5 @@
 import { SQUARE_DIMENSIONS } from '@/constants/constants';
-import { joinArtists } from '@/lib/utils';
+import { cn, joinArtists } from '@/lib/utils';
 import { Album } from '@/types/types';
 import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
@@ -57,7 +57,7 @@ function TopAlbum({
     <div ref={ref} onClick={handleAlbumClick} className={albumStyle}>
       {album && (
         <img
-          className={`${canDrop ? 'opacity-70' : ''}`}
+          className={cn('rounded', `${canDrop ? 'opacity-70' : ''}`)}
           src={album.images[0]?.url}
           alt={album.name}
           title={`${album.name} - ${joinArtists(album.artists)}`}
