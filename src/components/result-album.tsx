@@ -10,10 +10,11 @@ interface ResultAlbumProps {
 function ResultAlbum({ album, onClick }: ResultAlbumProps) {
   return album ? (
     <div
-      className={`border ${SQUARE_DIMENSIONS} rounded cursor-pointer`}
+      className={`border ${SQUARE_DIMENSIONS} rounded hover:border-primary hover:opacity-70 hover:cursor-pointer`}
       onClick={onClick}
     >
       <img
+        className="rounded "
         src={album.images[0]?.url}
         alt={album.name}
         title={`${album.name} - ${joinArtists(album.artists)}`}
