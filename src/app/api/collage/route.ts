@@ -4,7 +4,6 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request) {
   try {
     const { imageUrls }: { imageUrls: string[] } = await request.json();
-    console.log('imageUrls:', imageUrls);
     if (!Array.isArray(imageUrls) || imageUrls.length !== 20) {
       return NextResponse.json(
         { error: 'Invalid input. Provide exactly 20 image URLs.' },
