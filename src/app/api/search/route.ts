@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const query = searchParams.get('query');
 
-  if (process.env.MOCK === 'true') {
+  if (process.env.MOCK && process.env.MOCK === 'true') {
     const mockData = await loadMockData();
     return NextResponse.json(mockData);
   }
@@ -28,9 +28,12 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  const authResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth`
-  );
+  // dynamically construct the base URL from the request
+  const protocol = req.headers.get('x-forwarded-proto') || 'http';
+  const host = req.headers.get('host');
+  const baseUrl = `${protocol}://${host}`;
+
+  const authResponse = await fetch(`${baseUrl}/api/auth`);
   const authData = await authResponse.json();
 
   if (authResponse.status !== 200) {

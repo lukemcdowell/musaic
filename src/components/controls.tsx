@@ -36,7 +36,7 @@ function Controls({
               <Info />
             </Button>
           </TooltipTrigger>
-          <TooltipContent>How to Use Musaic</TooltipContent>
+          <TooltipContent>About & How to Use Musaic</TooltipContent>
         </Tooltip>
 
         <Tooltip>
