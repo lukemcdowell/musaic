@@ -10,6 +10,7 @@ import { SQUARE_DIMENSIONS } from '@/constants/constants';
 import { Album } from '@/types/types';
 import debounce from 'lodash.debounce';
 import { useCallback, useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import ResultAlbum from './result-album';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -28,9 +29,10 @@ function SearchDialog({
   gridIndex,
   addAlbumToGrid,
 }: SearchProps) {
+  const numResults = isMobile ? 4 : 9;
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [results, setResults] = useState<Array<Album | null>>(
-    Array(6).fill(null)
+    Array(numResults).fill(null)
   );
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -58,7 +60,9 @@ function SearchDialog({
       const data = await response.json();
 
       if (response.ok) {
-        setResults(data.albums.items);
+        setResults(
+          isMobile ? data.albums.items.slice(0, 4) : data.albums.items
+        );
       } else {
         setError(data.error.message);
       }
@@ -71,7 +75,7 @@ function SearchDialog({
 
   const clearSearch = () => {
     setSearchTerm('');
-    setResults(Array(6).fill(null));
+    setResults(Array(numResults).fill(null));
     setError(null);
   };
 
@@ -81,7 +85,7 @@ function SearchDialog({
   );
 
   useEffect(() => {
-    setResults(Array(6).fill(null));
+    setResults(Array(numResults).fill(null));
     setLoading(true);
     if (searchTerm.trim() !== '') {
       debouncedSearch(searchTerm);
@@ -100,13 +104,13 @@ function SearchDialog({
     ));
 
   const renderSkeletons = () =>
-    Array.from({ length: 6 }).map((_, index) => (
+    Array.from({ length: numResults }).map((_, index) => (
       <Skeleton key={index} className={`${SQUARE_DIMENSIONS}`} />
     ));
 
   return (
     <Dialog open={open} onOpenChange={closeModal}>
-      <DialogContent className="w-max">
+      <DialogContent className="w-max sm:min-w-max">
         <DialogHeader>
           <DialogTitle>Add Album{gridIndex === -1 ? 's' : ''}</DialogTitle>
         </DialogHeader>
@@ -129,7 +133,7 @@ function SearchDialog({
           )}
 
           <div className="flex justify-center ">
-            <div className="grid grid-cols-2 gap-2 pt-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-4">
               {loading ? renderSkeletons() : renderAlbums()}
             </div>
           </div>
