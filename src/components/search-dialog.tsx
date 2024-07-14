@@ -30,7 +30,7 @@ function SearchDialog({
 }: SearchProps) {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [results, setResults] = useState<Array<Album | null>>(
-    Array(9).fill(null)
+    Array(6).fill(null)
   );
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -71,7 +71,7 @@ function SearchDialog({
 
   const clearSearch = () => {
     setSearchTerm('');
-    setResults(Array(9).fill(null));
+    setResults(Array(6).fill(null));
     setError(null);
   };
 
@@ -81,7 +81,7 @@ function SearchDialog({
   );
 
   useEffect(() => {
-    setResults(Array(9).fill(null));
+    setResults(Array(6).fill(null));
     setLoading(true);
     if (searchTerm.trim() !== '') {
       debouncedSearch(searchTerm);
@@ -100,13 +100,13 @@ function SearchDialog({
     ));
 
   const renderSkeletons = () =>
-    Array.from({ length: 9 }).map((_, index) => (
+    Array.from({ length: 6 }).map((_, index) => (
       <Skeleton key={index} className={`${SQUARE_DIMENSIONS}`} />
     ));
 
   return (
     <Dialog open={open} onOpenChange={closeModal}>
-      <DialogContent className="min-w-max">
+      <DialogContent className="w-max">
         <DialogHeader>
           <DialogTitle>Add Album{gridIndex === -1 ? 's' : ''}</DialogTitle>
         </DialogHeader>
@@ -128,8 +128,10 @@ function SearchDialog({
             <p className="text-center pt-8">No Results Found</p>
           )}
 
-          <div className="grid grid-cols-3 gap-2 pt-4">
-            {loading ? renderSkeletons() : renderAlbums()}
+          <div className="flex justify-center ">
+            <div className="grid grid-cols-2 gap-2 pt-4">
+              {loading ? renderSkeletons() : renderAlbums()}
+            </div>
           </div>
         </div>
       </DialogContent>
