@@ -4,12 +4,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { CirclePlus, CircleX, Download, Info } from 'lucide-react';
+import { CirclePlus, CircleX, Info } from 'lucide-react';
 import { useState } from 'react';
-import InfoDialog from './infoDialog';
+import DownloadButton from './download-button';
+import InfoDialog from './info-dialog';
 import { Button } from './ui/button';
 
 interface ControlsProps {
+  imageUrls: string[];
   openModalWithNoIndex: () => void;
   gridNotEmpty: boolean;
   gridFull: boolean;
@@ -17,6 +19,7 @@ interface ControlsProps {
 }
 
 function Controls({
+  imageUrls,
   openModalWithNoIndex,
   gridNotEmpty,
   gridFull,
@@ -39,13 +42,7 @@ function Controls({
         <Tooltip>
           <TooltipTrigger asChild>
             <span>
-              <Button
-                variant="outline"
-                onClick={openModalWithNoIndex}
-                disabled={!gridNotEmpty}
-              >
-                <Download />
-              </Button>
+              <DownloadButton imageUrls={imageUrls} gridFull={gridFull} />
             </span>
           </TooltipTrigger>
           <TooltipContent>Download As Image</TooltipContent>

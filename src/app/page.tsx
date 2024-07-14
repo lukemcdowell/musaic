@@ -3,7 +3,7 @@
 import Controls from '@/components/controls';
 import Grid from '@/components/grid';
 import Logo from '@/components/logo';
-import SearchDialog from '@/components/searchDialog';
+import SearchDialog from '@/components/search-dialog';
 import { useToast } from '@/components/ui/use-toast';
 import '@/styles/fade.css';
 import { Album } from '@/types/types';
@@ -106,6 +106,9 @@ export default function Home() {
             </h1>
           </div>
           <Controls
+            imageUrls={topAlbums.map((album) =>
+              album ? album.images[0].url : ''
+            )}
             openModalWithNoIndex={openModalWithNoIndex}
             gridNotEmpty={gridNotEmpty}
             gridFull={gridFull}

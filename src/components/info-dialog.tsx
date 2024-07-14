@@ -17,20 +17,20 @@ function InfoDialog({ openModal, setOpenModal }: InfoDialogProps) {
 
   return (
     <Dialog open={openModal} onOpenChange={closeModal}>
-      <DialogContent className="w-fit">
+      <DialogContent className="w-full sm:w-max">
         <DialogHeader>
           <DialogDescription>
-            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight text-left">
               About
             </h3>
-            <p className="mt-2 mb-4">
+            <p className="mt-2 mb-4 text-left">
               Musaic showcases your favorite music visually.
             </p>
 
-            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight text-left">
               How to Use
             </h3>
-            <ul className="mt-2 mb-4 ml-6 list-disc [&>li]:mt-2 marker:text-primary">
+            <ul className="mt-2 mb-4 ml-6 list-disc [&>li]:mt-2 marker:text-primary text-left">
               <li>
                 <strong className="text-primary">Add an Album:</strong> Click on
                 a square to search for an album and click on the album cover to
@@ -48,17 +48,14 @@ function InfoDialog({ openModal, setOpenModal }: InfoDialogProps) {
               <li>
                 <strong className="text-primary">Download Grid:</strong> Use the
                 "Download As Image" button to download your grid as an image.
-              </li>
-              <li>
-                <strong className="text-primary">Share Grid:</strong> Use the
-                "Share Grid" to share your grid on your social media.
+                You can only download a full grid of 20 albums.
               </li>
             </ul>
 
-            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight text-left">
               Data Source
             </h3>
-            <p className="my-2">
+            <p className="my-2 text-left">
               All music data is fetched in real-time from the Spotify API.
             </p>
           </DialogDescription>
