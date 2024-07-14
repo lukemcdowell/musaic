@@ -10,7 +10,7 @@ import { SQUARE_DIMENSIONS } from '@/constants/constants';
 import { Album } from '@/types/types';
 import debounce from 'lodash.debounce';
 import { useCallback, useEffect, useState } from 'react';
-import ResultAlbum from './resultAlbum';
+import ResultAlbum from './result-album';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Skeleton } from './ui/skeleton';
