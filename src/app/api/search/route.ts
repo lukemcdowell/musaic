@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const response = await fetch(
-      `https://api.spotify.com/v1/search?q=${query}&type=album&limit=6`,
+      `https://api.spotify.com/v1/search?q=${query}&type=album&limit=9`,
       searchOptions
     );
     const data = await response.json();
