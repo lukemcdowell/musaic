@@ -24,7 +24,7 @@ function InfoDialog({ openModal, setOpenModal }: InfoDialogProps) {
               About
             </h3>
             <p className="mt-2 mb-4 text-left">
-              Musaic showcases your favorite music visually.
+              Musaic showcases your favourite music visually.
             </p>
 
             <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight text-left">
