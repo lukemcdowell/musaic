@@ -1,6 +1,7 @@
 import { SQUARE_DIMENSIONS } from '@/constants/constants';
 import { joinArtists } from '@/lib/utils';
 import { Album } from '@/types/types';
+import Image from 'next/image';
 import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
@@ -56,7 +57,7 @@ function TopAlbum({
   return (
     <div ref={ref} onClick={handleAlbumClick} className={albumStyle}>
       {album && (
-        <img
+        <Image
           className={`${canDrop ? 'opacity-70' : ''}`}
           src={album.images[0]?.url}
           alt={album.name}

@@ -27,7 +27,6 @@ function InfoDialog({ openModal, setOpenModal }: InfoDialogProps) {
           <p className="mb-4 text-left">
             Musaic showcases your favourite music visually.
           </p>
-
           <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight text-left">
             How to Use
           </h3>
@@ -39,20 +38,19 @@ function InfoDialog({ openModal, setOpenModal }: InfoDialogProps) {
             </p>
             <p>
               <strong className="text-primary">- Add Multiple Albums:</strong>{' '}
-              Use the "Add Albums" button to populate the grid with multiple
-              albums.
+              Use the &quot;Add Albums&quot; button to populate the grid with
+              multiple albums.
             </p>
             <p>
               <strong className="text-primary">- Clear Grid:</strong> Use the
-              "Clear Grid" button to reset the grid.
+              &quot;Clear Grid&quot; button to reset the grid.
             </p>
             <p>
               <strong className="text-primary">- Download Grid:</strong> Use the
-              "Download As Image" button to download your grid as an image. You
-              can only download a full grid of 20 albums.
+              &quot;Download As Image&quot; button to download your grid as an
+              image. You can only download a full grid of 20 albums.
             </p>
           </div>
-
           <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight text-left">
             Data Source
           </h3>
