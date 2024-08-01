@@ -12,9 +12,11 @@ export async function POST(request: Request) {
     }
 
     const canvasWidth = 1000;
-    const canvasHeight = 800;
+    const musaicHeight = 800;
+    const footerHeight = 60;
+    const canvasHeight = musaicHeight + footerHeight;
     const imageWidth = canvasWidth / 5;
-    const imageHeight = canvasHeight / 4;
+    const imageHeight = musaicHeight / 4;
     const canvas = createCanvas(canvasWidth, canvasHeight);
     const ctx = canvas.getContext('2d');
 
@@ -29,6 +31,10 @@ export async function POST(request: Request) {
       const img = await loadImage(Buffer.from(arrayBuffer));
       ctx.drawImage(img, x, y, imageWidth, imageHeight);
     }
+
+    // add footer.png file to bottom of canvas
+    const footer = await loadImage('public/footer.png');
+    ctx.drawImage(footer, 0, musaicHeight, canvasWidth, footerHeight);
 
     const buffer = canvas.toBuffer('image/png');
     return new NextResponse(buffer, {
