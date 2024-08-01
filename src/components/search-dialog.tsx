@@ -29,7 +29,7 @@ function SearchDialog({
   gridIndex,
   addAlbumToGrid,
 }: SearchProps) {
-  const numResults = isMobile ? 4 : 9;
+  const numResults = isMobile ? 4 : 6;
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [results, setResults] = useState<Array<Album | null>>(
     Array(numResults).fill(null)
