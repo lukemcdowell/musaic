@@ -36,23 +36,23 @@ function InfoDialog({ openModal, setOpenModal }: InfoDialogProps) {
               </h5>
               <ul className="ml-6 mb-2 list-disc mt-except-first">
                 <li>
-                  <strong className="">Add an Album:</strong> Click on a square
-                  to search for an album and click on the album cover to add it
-                  to the grid. Use the &quot;Add Albums&quot; button to populate
-                  the grid with multiple albums.
+                  <strong>Add an Album:</strong> Click on a square to search for
+                  an album and click on the album cover to add it to the grid.
+                  Use the &quot;Add Albums&quot; button to populate the grid
+                  with multiple albums.
                 </li>
                 <li>
-                  <strong className="">Rearrange Albums:</strong> Drag albums to
-                  rearrange them on the grid.
+                  <strong>Rearrange Albums:</strong> Drag albums to rearrange
+                  them on the grid.
                 </li>
                 <li>
-                  <strong className="">Clear Grid:</strong> Use the &quot;Clear
-                  Grid&quot; button to reset the grid.
+                  <strong>Clear Grid:</strong> Use the &quot;Clear Grid&quot;
+                  button to reset the grid.
                 </li>
                 <li>
-                  <strong className="">Download Grid:</strong> Use the
-                  &quot;Download As Image&quot; button to download your grid as
-                  an image. You can only download a full grid of 20 albums.
+                  <strong>Download Grid:</strong> Use the &quot;Download As
+                  Image&quot; button to download your grid as an image. You can
+                  only download a full grid of 20 albums.
                 </li>
               </ul>
               <h3 className="scroll-m-20 text-xl text-primary font-semibold tracking-tight text-center sm:text-left">
@@ -61,6 +61,17 @@ function InfoDialog({ openModal, setOpenModal }: InfoDialogProps) {
               <p className="text-center sm:text-left">
                 All music data is fetched in real-time from the Spotify API.
               </p>
+              <Separator className="my-2" />
+              <div className="text-center sm:text-right">
+                Developed by{' '}
+                <a
+                  href="https://lukemcdowell.github.io/"
+                  target="_blank"
+                  className="font-medium text-primary underline underline-offset-4"
+                >
+                  Luke McDowell
+                </a>
+              </div>
             </div>
           </DialogDescription>
         </DialogHeader>
