@@ -2,6 +2,8 @@
 
 Musaic is a web application that allows users to search the Spotify API for albums and add their favorite album covers to a grid. Users can rearrange the grid by dragging and dropping the album covers and download their grid as an image.
 
+![image](https://github.com/user-attachments/assets/6dd7ed1b-b4c9-4f99-95d4-20e91bd11992)
+
 ## Technologies Used
 
 - React
