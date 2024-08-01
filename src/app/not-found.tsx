@@ -16,7 +16,7 @@ function NotFound() {
       )}
     >
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <Logo size={'large'} />
+        <Logo className="w-24 h-24" />
         <div className="flex flex-col items-center justify-center sm:items-start">
           <h1 className="text-primary scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             404
