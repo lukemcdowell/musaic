@@ -1,5 +1,6 @@
 import { createCanvas, loadImage } from 'canvas';
 import { NextResponse } from 'next/server';
+import path from 'path';
 
 export async function POST(request: Request) {
   try {
@@ -33,7 +34,8 @@ export async function POST(request: Request) {
     }
 
     // add footer.png file to bottom of canvas
-    const footer = await loadImage('public/footer.png');
+    const footerPath = path.join(process.cwd(), '/src/assets/footer.png');
+    const footer = await loadImage(footerPath);
     ctx.drawImage(footer, 0, musaicHeight, canvasWidth, footerHeight);
 
     const buffer = canvas.toBuffer('image/png');
