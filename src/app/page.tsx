@@ -73,7 +73,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('/mock/topAlbums.json');
+        const response = await fetch('/seedAlbums.json');
         const jsonData = await response.json();
         setTopAlbums(jsonData);
         localStorage.setItem('topAlbums', JSON.stringify(jsonData));
