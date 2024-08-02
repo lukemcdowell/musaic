@@ -55,6 +55,7 @@ function DownloadButton({ imageUrls, gridFull }: DownloadButtonProps) {
       variant="outline"
       onClick={handleDownloadCollage}
       disabled={!gridFull || loading}
+      aria-label="download as image"
     >
       {loading ? <Loader2 className="animate-spin" /> : <Download />}
     </Button>

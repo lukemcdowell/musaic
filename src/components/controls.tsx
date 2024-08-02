@@ -32,7 +32,11 @@ function Controls({
       <TooltipProvider delayDuration={0}>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button variant="outline" onClick={() => setOpenModal(true)}>
+            <Button
+              variant="outline"
+              onClick={() => setOpenModal(true)}
+              aria-label="about & how to use"
+            >
               <Info />
             </Button>
           </TooltipTrigger>
@@ -55,6 +59,7 @@ function Controls({
                 variant="outline"
                 onClick={openModalWithNoIndex}
                 disabled={gridFull}
+                aria-label="add albums"
               >
                 <CirclePlus />
               </Button>
@@ -66,7 +71,11 @@ function Controls({
         <Tooltip>
           <TooltipTrigger asChild>
             <span>
-              <Button onClick={clearGrid} disabled={!gridNotEmpty}>
+              <Button
+                onClick={clearGrid}
+                disabled={!gridNotEmpty}
+                aria-label="clear grid"
+              >
                 <CircleX />
               </Button>
             </span>
