@@ -88,28 +88,50 @@ describe('Home', () => {
     expect(dataSourceContent).toBeInTheDocument();
   });
 
-  // it('displays the search modal when the add albums button is clicked', async () => {
-  //   await act(async () => {
-  //     render(<Home />);
-  //   });
+  it('displays the add multiple albums search modal when the add albums button is clicked', async () => {
+    await act(async () => {
+      render(<Home />);
+    });
 
-  //   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 
-  //   const addAlbumsButton = screen.getByRole('button', {
-  //     name: /add albums/i,
-  //   });
-  //   expect(addAlbumsButton).toBeInTheDocument();
+    // clear grid to enable add albums button
+    const clearGridButton = screen.getByRole('button', { name: /clear grid/i });
+    expect(clearGridButton).toBeInTheDocument();
+    fireEvent.click(clearGridButton);
 
-  //   fireEvent.click(addAlbumsButton);
+    const addAlbumsButton = screen.getByRole('button', {
+      name: /add albums/i,
+    });
+    expect(addAlbumsButton).toBeInTheDocument();
 
-  //   await waitFor(() => {
-  //     const modal = screen.getByRole('dialog');
-  //     expect(modal).toBeInTheDocument();
+    fireEvent.click(addAlbumsButton);
 
-  //     const searchModalContent = screen.getByText(/add albums/i);
-  //     expect(searchModalContent).toBeInTheDocument();
-  //   });
-  // });
+    const modal = screen.getByRole('dialog');
+    expect(modal).toBeInTheDocument();
+
+    const searchModalContent = screen.getByText('Add Albums');
+    expect(searchModalContent).toBeInTheDocument();
+  });
+
+  it('displays the add single album search modal when a grid square is clicked', async () => {
+    await act(async () => {
+      render(<Home />);
+    });
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+
+    const initialImage = screen.getByAltText('Top album: MM...FOOD');
+    expect(initialImage).toBeInTheDocument();
+
+    fireEvent.click(initialImage);
+
+    const modal = screen.getByRole('dialog');
+    expect(modal).toBeInTheDocument();
+
+    const searchModalContent = screen.getByText('Add Album');
+    expect(searchModalContent).toBeInTheDocument();
+  });
 
   it('clears the grid when the clear grid button is clicked', async () => {
     await act(async () => {
