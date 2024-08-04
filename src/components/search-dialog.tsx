@@ -60,6 +60,7 @@ function SearchDialog({
       const data = await response.json();
 
       if (response.ok) {
+        console.log(data.albums.items);
         setResults(
           isMobile ? data.albums.items.slice(0, 4) : data.albums.items
         );
