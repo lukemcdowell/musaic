@@ -16,7 +16,7 @@ function ResultAlbum({ album, onClick }: ResultAlbumProps) {
       <img
         className="rounded "
         src={album.images[0]?.url}
-        alt={album.name}
+        alt={`Search result: ${album.name}`}
         title={`${album.name} - ${joinArtists(album.artists)}`}
       />
     </div>
