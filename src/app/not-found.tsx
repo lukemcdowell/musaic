@@ -26,7 +26,7 @@ function NotFound() {
           </h1>
         </div>
       </div>
-      <Button variant="outline" asChild>
+      <Button variant="outline" asChild aria-label="return to home">
         <Link href="/">Return to Musaic</Link>
       </Button>
     </div>
