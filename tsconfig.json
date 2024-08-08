@@ -20,14 +20,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["cypress", "@4tw/cypress-drag-drop"]
+    "types": ["node", "jest", "@testing-library/jest-dom"]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "cypress/support/tasks.js"
-  ],
-  "exclude": ["node_modules"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "./cypress.config.ts", "cypress", "**/*.cy.tsx"]
 }
