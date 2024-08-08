@@ -1,5 +1,4 @@
-const path = require('path');
-const fs = require('fs');
+import path from 'path';
 
 describe('musaic home page', () => {
   beforeEach(() => {
@@ -61,11 +60,8 @@ describe('musaic home page', () => {
     // TODO
   });
 
-  it('downloads a collage image', async () => {
+  it('downloads a collage image', () => {
     const downloadFilePath = path.join('.', '/cypress/downloads/musaic.png');
-
-    // TODO: clean up download - custom command?
-    // cy.deleteDownloadsFolder();
 
     cy.intercept('POST', '/api/collage', {
       fixture: 'musaic.png',
@@ -78,5 +74,8 @@ describe('musaic home page', () => {
     cy.wait('@collageRequest');
 
     cy.readFile(downloadFilePath).should('exist');
+
+    // clean up download folder
+    cy.task('removeDownloadsFolder');
   });
 });
