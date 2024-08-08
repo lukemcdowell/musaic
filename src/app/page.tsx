@@ -98,7 +98,7 @@ export default function Home() {
   return (
     <>
       <div className="flex w-full min-h-screen flex-col items-center pb-8">
-        <div className="flex flex-col w-full justify-between items-center gap-4 py-6 sm:flex-row ">
+        <div className="flex flex-col w-full justify-between items-center gap-2 py-4 md:py-6 sm:flex-row px-4">
           <div className="flex items-center gap-2 lg:gap-4">
             <Logo className="sm:w-12 sm:h-12 lg:w-14 lg:h-14" />
             <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
