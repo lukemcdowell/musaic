@@ -1,4 +1,3 @@
-import { SQUARE_DIMENSIONS } from '@/constants/constants';
 import { cn, joinArtists } from '@/lib/utils';
 import { Album } from '@/types/types';
 import { useRef } from 'react';
@@ -49,7 +48,9 @@ function TopAlbum({
   } else if (canDrop) {
     dropStyle = 'bg-secondary';
   }
-  let albumStyle = `border ${SQUARE_DIMENSIONS} rounded hover:border-primary hover:opacity-70 hover:cursor-pointer ${dropStyle}`;
+  let albumStyle = `w-full ${
+    !album && 'pt-[100%]'
+  } rounded border hover:border-primary hover:opacity-70 hover:cursor-pointer ${dropStyle}`;
 
   drag(drop(ref));
 
