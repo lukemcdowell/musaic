@@ -60,7 +60,7 @@ function TopAlbum({
         <img
           className={cn('rounded', `${canDrop ? 'opacity-70' : ''}`)}
           src={album.images[0]?.url}
-          alt={album.name}
+          alt={`Top album: ${album.name}`}
           title={`${album.name} - ${joinArtists(album.artists)}`}
         />
       )}
