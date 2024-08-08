@@ -28,7 +28,7 @@ function Grid({ topAlbums, setTopAlbums, handleAlbumClick }: GridProps) {
       backend={isMobile ? TouchBackend : HTML5Backend}
       options={isMobile ? { enableMouseEvents: true } : ''}
     >
-      <div className="grid gap-2 h-full grid-cols-2 sm:grid-cols-4 lg:grid-cols-5">
+      <div className="px-2 sm:px-4 pb-2 grid gap-1 md:gap-2 grid-cols-4 sm:grid-cols-5 w-screen max-w-5xl">
         {topAlbums.map((album, index) => (
           <TopAlbum
             key={index}
