@@ -11,6 +11,8 @@ Musaic is a web application that allows users to search the Spotify API for albu
 - Shadcn
 - Tailwind CSS
 - Spotify API
+- Jest
+- Cypress
 
 ## Installation
 
@@ -53,6 +55,36 @@ To install and run the project locally, follow these steps:
 
 5. **Open the application**:
    Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+## Testing
+
+This project includes unit tests using Jest and end-to-end tests using Cypress.
+
+1.  **To run the unit tests**:
+
+    ```bash
+    npm run test
+    ```
+
+2.  **To run the Cypress tests**:
+
+    Start the development server:
+
+    ```bash
+    npm run dev
+    ```
+
+    In a new terminal window, run the following command to open the Cypress Test Runner:
+
+    ```bash
+    npm run cy:open
+    ```
+
+    Alternatively, you can run the Cypress tests in headless mode to run them without opening the browser:
+
+    ```bash
+    npm run cy:run
+    ```
 
 ## Usage
 
