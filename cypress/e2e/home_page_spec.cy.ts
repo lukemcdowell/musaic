@@ -57,7 +57,43 @@ describe('musaic home page', () => {
   });
 
   it('can drag and drop to rearrange albums', () => {
-    // TODO
+    // check order before drag and drop
+    cy.get('img[alt="Top album: MM...FOOD"]')
+      .parent()
+      .next()
+      .find('img')
+      .should('have.attr', 'alt', 'Top album: Nevermind (Remastered)');
+    cy.get('img[alt="Top album: Nevermind (Remastered)"]')
+      .parent()
+      .next()
+      .find('img')
+      .should('have.attr', 'alt', 'Top album: Blonde');
+    cy.get('img[alt="Top album: Blonde"]')
+      .parent()
+      .next()
+      .find('img')
+      .should(
+        'have.attr',
+        'alt',
+        "Top album: Sgt. Pepper's Lonely Hearts Club Band (Remastered)"
+      );
+
+    // drag and drop
+    cy.get('img[alt="Top album: Nevermind (Remastered)"]').drag(
+      'img[alt="Top album: MM...FOOD"]'
+    );
+
+    // check order after drag and drop
+    cy.get('img[alt="Top album: Nevermind (Remastered)"]')
+      .parent()
+      .next()
+      .find('img')
+      .should('have.attr', 'alt', 'Top album: MM...FOOD');
+    cy.get('img[alt="Top album: MM...FOOD"]')
+      .parent()
+      .next()
+      .find('img')
+      .should('have.attr', 'alt', 'Top album: Blonde');
   });
 
   it('downloads a collage image', () => {
