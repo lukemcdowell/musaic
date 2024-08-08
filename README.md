@@ -107,6 +107,14 @@ This project includes unit tests using Jest and end-to-end tests using Cypress.
    - Click the "Download As Image" button to download the current grid as an image.
    - Note: The download feature only works when the grid is full with 20 albums.
 
+## Known Problems
+
+- **React DnD Backend Configuration Requires Refresh**  
+  The React DnD backend is configured at runtime, which sometimes leads to issues with drag-and-drop functionality whenever you resize the screen (e.g. using the responsive layout in developer tools). To resolve these issues, a page refresh may be necessary to reinitialize the backend properly.
+
+- **No Scrolling on Small Screens During Drag**  
+  When dragging items to the edge of the screen on smaller devices, automatic scrolling is not triggered. This can cause difficulty in positioning items in areas of the grid that are not visible without manual scrolling and can hinder users from scrolling on the page.
+
 ---
 
 Feel free to contribute to this project by opening issues or submitting pull requests!
