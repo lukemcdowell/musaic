@@ -16,7 +16,6 @@ export default function Home() {
   const [openModal, setOpenModal] = useState(false);
   const [gridIndex, setGridIndex] = useState(-1);
   const [loaded, setLoaded] = useState(false);
-  const [retry, setRetry] = useState(false);
 
   const { toast } = useToast();
 
@@ -80,7 +79,6 @@ export default function Home() {
         localStorage.setItem('topAlbums', JSON.stringify(jsonData));
       } catch (error) {
         console.error('Error fetching data:', error);
-        setRetry(true);
       }
     }
 
@@ -95,7 +93,7 @@ export default function Home() {
     }
 
     setLoaded(true);
-  }, [retry]);
+  }, []);
 
   return (
     <>
