@@ -5,6 +5,7 @@ import Grid from '@/components/grid';
 import Logo from '@/components/logo';
 import SearchDialog from '@/components/search-dialog';
 import { useToast } from '@/components/ui/use-toast';
+import { warmup } from '@/lib/utils';
 import '@/styles/fade.css';
 import { Album } from '@/types/types';
 import { useEffect, useState } from 'react';
@@ -93,6 +94,9 @@ export default function Home() {
     }
 
     setLoaded(true);
+
+    // warm up vercel serverless function
+    warmup();
   }, []);
 
   return (
