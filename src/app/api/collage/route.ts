@@ -1,13 +1,13 @@
-import { createCanvas, loadImage } from 'canvas';
-import { NextResponse } from 'next/server';
-import path from 'path';
+import { createCanvas, loadImage } from "canvas";
+import { NextResponse } from "next/server";
+import path from "path";
 
 export async function POST(request: Request) {
   try {
     const { imageUrls }: { imageUrls: string[] } = await request.json();
     if (!Array.isArray(imageUrls) || imageUrls.length !== 20) {
       return NextResponse.json(
-        { error: 'Invalid input. Provide exactly 20 image URLs.' },
+        { error: "Invalid input. Provide exactly 20 image URLs." },
         { status: 400 }
       );
     }
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     const imageWidth = canvasWidth / 5;
     const imageHeight = musaicHeight / 4;
     const canvas = createCanvas(canvasWidth, canvasHeight);
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
 
     for (let i = 0; i < imageUrls.length; i++) {
       const url = imageUrls[i];
@@ -34,21 +34,21 @@ export async function POST(request: Request) {
     }
 
     // add footer.png file to bottom of canvas
-    const footerPath = path.join(process.cwd(), '/src/assets/footer.png');
+    const footerPath = path.join(process.cwd(), "/src/assets/footer.png");
     const footer = await loadImage(footerPath);
     ctx.drawImage(footer, 0, musaicHeight, canvasWidth, footerHeight);
 
-    const buffer = canvas.toBuffer('image/png');
-    return new NextResponse(buffer, {
+    const buffer = canvas.toBuffer("image/png");
+    return new NextResponse(buffer as unknown as BodyInit, {
       headers: {
-        'Content-Type': 'image/png',
-        'Content-Disposition': 'attachment; filename="musaic.png"',
+        "Content-Type": "image/png",
+        "Content-Disposition": 'attachment; filename="musaic.png"',
       },
     });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: 'An error occurred while creating the collage.' },
+      { error: "An error occurred while creating the collage." },
       { status: 500 }
     );
   }
