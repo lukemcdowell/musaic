@@ -123,7 +123,9 @@ describe("Home", () => {
 
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
 
-    const initialImage = screen.getByAltText("Top album: MM...FOOD");
+    const initialImage = screen.getByAltText(
+      "Top album: Nevermind (Remastered)"
+    );
     expect(initialImage).toBeInTheDocument();
 
     fireEvent.click(initialImage);
@@ -140,7 +142,9 @@ describe("Home", () => {
       render(<Home />);
     });
 
-    const initialImage = screen.getByAltText("Top album: MM...FOOD");
+    const initialImage = screen.getByAltText(
+      "Top album: Nevermind (Remastered)"
+    );
     expect(initialImage).toHaveAttribute("src", testData[0].images[0].url);
 
     const clearGridButton = screen.getByRole("button", { name: /clear grid/i });
