@@ -59,6 +59,7 @@ describe("musaic home page", () => {
   it("can drag and drop to rearrange albums", () => {
     const NEVERMIND = "Top album: Nevermind (Remastered)";
     const STONE_ROSES = "Top album: The Stone Roses";
+    const DIRT = "Top album: Dirt (2022 Remaster)";
     const MADVILLIANY = "Top album: Madvillainy";
     const UNKNOWN_PLEASURES = "Top album: Unknown Pleasures";
 
@@ -69,6 +70,11 @@ describe("musaic home page", () => {
       .find("img")
       .should("have.attr", "alt", STONE_ROSES);
     cy.get(`img[alt="${STONE_ROSES}"]`)
+      .parent()
+      .next()
+      .find("img")
+      .should("have.attr", "alt", DIRT);
+    cy.get(`img[alt="${DIRT}"]`)
       .parent()
       .next()
       .find("img")
@@ -94,6 +100,11 @@ describe("musaic home page", () => {
       .find("img")
       .should("have.attr", "alt", STONE_ROSES);
     cy.get(`img[alt="${STONE_ROSES}"]`)
+      .parent()
+      .next()
+      .find("img")
+      .should("have.attr", "alt", DIRT);
+    cy.get(`img[alt="${DIRT}"]`)
       .parent()
       .next()
       .find("img")
