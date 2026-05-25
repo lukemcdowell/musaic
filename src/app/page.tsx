@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import Controls from '@/components/controls';
-import Grid from '@/components/grid';
-import Logo from '@/components/logo';
-import SearchDialog from '@/components/search-dialog';
-import { useToast } from '@/components/ui/use-toast';
-import { warmup } from '@/lib/utils';
-import '@/styles/fade.css';
-import { Album } from '@/types/types';
-import { useEffect, useState } from 'react';
+import Controls from "@/components/controls";
+import Grid from "@/components/grid";
+import Logo from "@/components/logo";
+import SearchDialog from "@/components/search-dialog";
+import { useToast } from "@/components/ui/use-toast";
+import { warmup } from "@/lib/utils";
+import "@/styles/fade.css";
+import { Album } from "@/types/types";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [topAlbums, setTopAlbums] = useState<Array<Album | null>>(
-    Array(20).fill(null)
+    Array(20).fill(null),
   );
   const [openModal, setOpenModal] = useState(false);
   const [gridIndex, setGridIndex] = useState(-1);
@@ -62,28 +62,28 @@ export default function Home() {
 
   const clearGrid = () => {
     setTopAlbums(Array(20).fill(null));
-    localStorage.setItem('topAlbums', JSON.stringify(Array(20).fill(null)));
+    localStorage.setItem("topAlbums", JSON.stringify(Array(20).fill(null)));
   };
 
   useEffect(() => {
     if (gridNotEmpty) {
-      localStorage.setItem('topAlbums', JSON.stringify(topAlbums));
+      localStorage.setItem("topAlbums", JSON.stringify(topAlbums));
     }
   }, [topAlbums]);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('/seedAlbums.json');
+        const response = await fetch("/seedAlbums.json");
         const jsonData = await response.json();
         setTopAlbums(jsonData);
-        localStorage.setItem('topAlbums', JSON.stringify(jsonData));
+        localStorage.setItem("topAlbums", JSON.stringify(jsonData));
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     }
 
-    const storedTopAlbums = localStorage.getItem('topAlbums');
+    const storedTopAlbums = localStorage.getItem("topAlbums");
     if (
       !storedTopAlbums ||
       JSON.parse(storedTopAlbums).every((album: Album) => album === null)
@@ -111,7 +111,7 @@ export default function Home() {
           </div>
           <Controls
             imageUrls={topAlbums.map((album) =>
-              album ? album.images[0].url : ''
+              album ? album.images[0].url : "",
             )}
             openModalWithNoIndex={openModalWithNoIndex}
             gridNotEmpty={gridNotEmpty}
@@ -120,7 +120,7 @@ export default function Home() {
           />
         </div>
 
-        <div className={`fade-in ${loaded ? 'visible' : ''}`}>
+        <div className={`fade-in ${loaded ? "visible" : ""}`}>
           <Grid
             topAlbums={topAlbums}
             setTopAlbums={setTopAlbums}

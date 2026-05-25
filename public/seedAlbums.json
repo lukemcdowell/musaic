@@ -2868,18 +2868,7 @@
   },
   {
     "album_type": "album",
-    "artists": [
-      {
-        "external_urls": {
-          "spotify": "https://open.spotify.com/artist/7yk35uHNQclPXFGFoTU44w"
-        },
-        "href": "https://api.spotify.com/v1/artists/7yk35uHNQclPXFGFoTU44w",
-        "id": "7yk35uHNQclPXFGFoTU44w",
-        "name": "The Pharcyde",
-        "type": "artist",
-        "uri": "spotify:artist:7yk35uHNQclPXFGFoTU44w"
-      }
-    ],
+    "total_tracks": 14,
     "available_markets": [
       "AR",
       "AU",
@@ -2934,7 +2923,6 @@
       "TW",
       "TR",
       "UY",
-      "US",
       "GB",
       "AD",
       "LI",
@@ -3067,33 +3055,44 @@
       "XK"
     ],
     "external_urls": {
-      "spotify": "https://open.spotify.com/album/48kU5gP41TqZEw32Cwhsna"
+      "spotify": "https://open.spotify.com/album/293aYSIVNjjmkAwupnlxRd"
     },
-    "href": "https://api.spotify.com/v1/albums/48kU5gP41TqZEw32Cwhsna",
-    "id": "48kU5gP41TqZEw32Cwhsna",
+    "href": "https://api.spotify.com/v1/albums/293aYSIVNjjmkAwupnlxRd",
+    "id": "293aYSIVNjjmkAwupnlxRd",
     "images": [
       {
         "height": 640,
-        "url": "https://i.scdn.co/image/ab67616d0000b2739ec4abd35652fafe34ee7dfb",
+        "url": "https://i.scdn.co/image/ab67616d0000b27355280797e907795bb2f4537b",
         "width": 640
       },
       {
         "height": 300,
-        "url": "https://i.scdn.co/image/ab67616d00001e029ec4abd35652fafe34ee7dfb",
+        "url": "https://i.scdn.co/image/ab67616d00001e0255280797e907795bb2f4537b",
         "width": 300
       },
       {
         "height": 64,
-        "url": "https://i.scdn.co/image/ab67616d000048519ec4abd35652fafe34ee7dfb",
+        "url": "https://i.scdn.co/image/ab67616d0000485155280797e907795bb2f4537b",
         "width": 64
       }
     ],
-    "name": "Bizarre Ride II The Pharcyde",
-    "release_date": "1992-11-24",
+    "name": "Audioslave",
+    "release_date": "2002-11-17",
     "release_date_precision": "day",
-    "total_tracks": 16,
     "type": "album",
-    "uri": "spotify:album:48kU5gP41TqZEw32Cwhsna"
+    "uri": "spotify:album:293aYSIVNjjmkAwupnlxRd",
+    "artists": [
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/2ziB7fzrXBoh1HUPS6sVFn"
+        },
+        "href": "https://api.spotify.com/v1/artists/2ziB7fzrXBoh1HUPS6sVFn",
+        "id": "2ziB7fzrXBoh1HUPS6sVFn",
+        "name": "Audioslave",
+        "type": "artist",
+        "uri": "spotify:artist:2ziB7fzrXBoh1HUPS6sVFn"
+      }
+    ]
   },
   {
     "album_type": "album",
@@ -3326,7 +3325,7 @@
   },
   {
     "album_type": "album",
-    "total_tracks": 15,
+    "total_tracks": 11,
     "available_markets": [
       "AR",
       "AU",
@@ -3381,7 +3380,6 @@
       "TW",
       "TR",
       "UY",
-      "US",
       "GB",
       "AD",
       "LI",
@@ -3514,42 +3512,42 @@
       "XK"
     ],
     "external_urls": {
-      "spotify": "https://open.spotify.com/album/6ICrBzsbHVluGHP8wGK4Y3"
+      "spotify": "https://open.spotify.com/album/2yNaksHgeMQM9Quse463b5"
     },
-    "href": "https://api.spotify.com/v1/albums/6ICrBzsbHVluGHP8wGK4Y3",
-    "id": "6ICrBzsbHVluGHP8wGK4Y3",
+    "href": "https://api.spotify.com/v1/albums/2yNaksHgeMQM9Quse463b5",
+    "id": "2yNaksHgeMQM9Quse463b5",
     "images": [
       {
         "height": 640,
-        "url": "https://i.scdn.co/image/ab67616d0000b273e1f5fcef5fb5f70aa0a717fc",
+        "url": "https://i.scdn.co/image/ab67616d0000b273a388a3f20d1bf2123249cc79",
         "width": 640
       },
       {
         "height": 300,
-        "url": "https://i.scdn.co/image/ab67616d00001e02e1f5fcef5fb5f70aa0a717fc",
+        "url": "https://i.scdn.co/image/ab67616d00001e02a388a3f20d1bf2123249cc79",
         "width": 300
       },
       {
         "height": 64,
-        "url": "https://i.scdn.co/image/ab67616d00004851e1f5fcef5fb5f70aa0a717fc",
+        "url": "https://i.scdn.co/image/ab67616d00004851a388a3f20d1bf2123249cc79",
         "width": 64
       }
     ],
-    "name": "Incesticide",
-    "release_date": "1992-12-14",
+    "name": "Is This It",
+    "release_date": "2001-07-30",
     "release_date_precision": "day",
     "type": "album",
-    "uri": "spotify:album:6ICrBzsbHVluGHP8wGK4Y3",
+    "uri": "spotify:album:2yNaksHgeMQM9Quse463b5",
     "artists": [
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/6olE6TJLqED3rqDCT0FyPh"
+          "spotify": "https://open.spotify.com/artist/0epOFNiUfyON9EYx7Tpr6V"
         },
-        "href": "https://api.spotify.com/v1/artists/6olE6TJLqED3rqDCT0FyPh",
-        "id": "6olE6TJLqED3rqDCT0FyPh",
-        "name": "Nirvana",
+        "href": "https://api.spotify.com/v1/artists/0epOFNiUfyON9EYx7Tpr6V",
+        "id": "0epOFNiUfyON9EYx7Tpr6V",
+        "name": "The Strokes",
         "type": "artist",
-        "uri": "spotify:artist:6olE6TJLqED3rqDCT0FyPh"
+        "uri": "spotify:artist:0epOFNiUfyON9EYx7Tpr6V"
       }
     ]
   },
